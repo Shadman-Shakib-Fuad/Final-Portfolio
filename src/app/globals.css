@@ -1,26 +1,245 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary: #09090f;
+  --bg-secondary: #0d0d1a;
+  --purple-glow: #7c3aed;
+  --purple-light: #a78bfa;
+  --blue-glow: #2563eb;
+  --blue-light: #60a5fa;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(15, 15, 30, 0.7);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--purple-glow);
+  border-radius: 3px;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(124, 58, 237, 0.3);
+  color: #fff;
+}
+
+/* ─── Glass card ─── */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ─── Glow text ─── */
+.glow-text {
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glow border button ─── */
+.glow-btn {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.glow-btn:hover {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.5), 0 0 40px rgba(124, 58, 237, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ─── Profile float ─── */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+.float-anim {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+/* ─── Blob animations ─── */
+@keyframes blobMove1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.08); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+@keyframes blobMove2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-35px, 25px) scale(1.05); }
+  66% { transform: translate(25px, -15px) scale(0.97); }
+}
+@keyframes blobMove3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 30px) scale(1.06); }
+}
+.blob-1 { animation: blobMove1 12s ease-in-out infinite; }
+.blob-2 { animation: blobMove2 15s ease-in-out infinite; }
+.blob-3 { animation: blobMove3 18s ease-in-out infinite; }
+
+/* ─── Floating tech icon ─── */
+@keyframes techFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.06; }
+  50% { transform: translateY(-20px) rotate(5deg); opacity: 0.1; }
+}
+.tech-icon-float {
+  animation: techFloat var(--duration, 8s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ─── Navbar active glow ─── */
+.nav-link-active {
+  color: var(--purple-light);
+  border-bottom: 2px solid var(--purple-glow);
+  text-shadow: 0 0 12px rgba(167, 139, 250, 0.6);
+}
+
+/* ─── Section fade in ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* ─── Skill card hover ─── */
+.skill-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.skill-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.35);
+}
+
+/* ─── Project card ─── */
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+}
+
+/* ─── Certificate card ─── */
+.cert-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+.cert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(96, 165, 250, 0.3);
+}
+.cert-card:hover img {
+  transform: scale(1.04);
+}
+.cert-card img {
+  transition: transform 0.4s ease;
+}
+
+/* ─── Stats card ─── */
+.stat-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 22px rgba(124, 58, 237, 0.3);
+}
+
+/* ─── Bio row ─── */
+.bio-row {
+  transition: background 0.2s ease;
+}
+.bio-row:hover {
+  background: rgba(124, 58, 237, 0.07);
+}
+
+/* ─── Social sidebar ─── */
+.social-icon {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.social-icon:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.5);
+}
+
+/* ─── Form input focus ─── */
+.form-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  transition: border-color 0.25s, box-shadow 0.25s;
+  outline: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  width: 100%;
+}
+.form-input:focus {
+  border-color: var(--purple-glow);
+  box-shadow: 0 0 14px rgba(124, 58, 237, 0.25);
+}
+.form-input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+/* ─── Hamburger ─── */
+.hamburger-line {
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* ─── Section title underline ─── */
+.section-title-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #2563eb);
+  border-radius: 2px;
+  margin: 8px auto 0;
+}
+
+/* ─── Purple gradient border ─── */
+.purple-border-glow {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.6), 0 0 30px rgba(124, 58, 237, 0.2);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .hero-two-col {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-btns {
+    justify-content: center;
+  }
+  .social-sidebar {
+    display: none;
+  }
 }
