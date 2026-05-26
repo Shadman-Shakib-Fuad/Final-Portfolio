@@ -22,7 +22,6 @@ import {
   FaPython,
   FaJava,
   FaFigma,
-  FaDatabase,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -39,37 +38,37 @@ const NAV_LINKS = ["Home", "Skills", "Projects", "Certificates", "Contact", "Abo
 
 // ─── Tech background icons ────────────────────────────────────
 const TECH_BG = [
-  { Icon: FaReact,    top: "8%",  left: "5%",  size: 48, dur: "9s",  delay: "0s"   },
-  { Icon: FaHtml5,    top: "15%", left: "88%", size: 42, dur: "11s", delay: "1s"   },
-  { Icon: FaCss3Alt,  top: "30%", left: "2%",  size: 38, dur: "13s", delay: "2s"   },
-  { Icon: FaJs,       top: "50%", left: "93%", size: 40, dur: "10s", delay: "0.5s" },
-  { Icon: FaNodeJs,   top: "68%", left: "6%",  size: 44, dur: "14s", delay: "3s"   },
-  { Icon: SiMongodb,  top: "80%", left: "85%", size: 40, dur: "12s", delay: "1.5s" },
-  { Icon: SiNextdotjs,top: "20%", left: "50%", size: 36, dur: "16s", delay: "4s"   },
-  { Icon: FaGithub,   top: "72%", left: "48%", size: 38, dur: "15s", delay: "2.5s" },
-  { Icon: FaPython,   top: "88%", left: "20%", size: 42, dur: "11s", delay: "0.8s" },
-  { Icon: FaJava,     top: "40%", left: "80%", size: 36, dur: "13s", delay: "3.5s" },
-  { Icon: SiC,        top: "60%", left: "25%", size: 34, dur: "10s", delay: "1.2s" },
-  { Icon: SiFirebase, top: "5%",  left: "40%", size: 38, dur: "12s", delay: "2s"   },
+  { Icon: FaReact,     top: "8%",  left: "5%",  size: 48 },
+  { Icon: FaHtml5,     top: "15%", left: "88%", size: 42 },
+  { Icon: FaCss3Alt,   top: "30%", left: "2%",  size: 38 },
+  { Icon: FaJs,        top: "50%", left: "93%", size: 40 },
+  { Icon: FaNodeJs,    top: "68%", left: "6%",  size: 44 },
+  { Icon: SiMongodb,   top: "80%", left: "85%", size: 40 },
+  { Icon: SiNextdotjs, top: "20%", left: "50%", size: 36 },
+  { Icon: FaGithub,    top: "72%", left: "48%", size: 38 },
+  { Icon: FaPython,    top: "88%", left: "20%", size: 42 },
+  { Icon: FaJava,      top: "40%", left: "80%", size: 36 },
+  { Icon: SiC,         top: "60%", left: "25%", size: 34 },
+  { Icon: SiFirebase,  top: "5%",  left: "40%", size: 38 },
 ];
 
 // ─── Skills data ──────────────────────────────────────────────
 const SKILLS = [
-  { name: "HTML5",       Icon: FaHtml5,     color: "#e34f26" },
-  { name: "CSS3",        Icon: FaCss3Alt,   color: "#264de4" },
-  { name: "JavaScript",  Icon: FaJs,        color: "#f7df1e" },
-  { name: "React JS",    Icon: FaReact,     color: "#61dafb" },
-  { name: "Next.js",     Icon: SiNextdotjs, color: "#fff"    },
-  { name: "Tailwind CSS",Icon: SiTailwindcss,color:"#38bdf8" },
-  { name: "Node.js",     Icon: FaNodeJs,    color: "#68a063" },
-  { name: "Firebase",    Icon: SiFirebase,  color: "#ffca28" },
-  { name: "MongoDB",     Icon: SiMongodb,   color: "#4db33d" },
-  { name: "Express.js",  Icon: SiExpress,   color: "#fff"    },
-  { name: "Git & GitHub",Icon: FaGitAlt,    color: "#f05032" },
-  { name: "Figma",       Icon: FaFigma,     color: "#f24e1e" },
-  { name: "C",           Icon: SiC,         color: "#a8b9cc" },
-  { name: "Java",        Icon: FaJava,      color: "#007396" },
-  { name: "Python",      Icon: FaPython,    color: "#3776ab" },
+  { name: "HTML5",        Icon: FaHtml5,      color: "#e34f26" },
+  { name: "CSS3",         Icon: FaCss3Alt,    color: "#264de4" },
+  { name: "JavaScript",   Icon: FaJs,         color: "#f7df1e" },
+  { name: "React JS",     Icon: FaReact,      color: "#61dafb" },
+  { name: "Next.js",      Icon: SiNextdotjs,  color: "#fff"    },
+  { name: "Tailwind CSS", Icon: SiTailwindcss,color: "#38bdf8" },
+  { name: "Node.js",      Icon: FaNodeJs,     color: "#68a063" },
+  { name: "Firebase",     Icon: SiFirebase,   color: "#ffca28" },
+  { name: "MongoDB",      Icon: SiMongodb,    color: "#4db33d" },
+  { name: "Express.js",   Icon: SiExpress,    color: "#fff"    },
+  { name: "Git & GitHub", Icon: FaGitAlt,     color: "#f05032" },
+  { name: "Figma",        Icon: FaFigma,      color: "#f24e1e" },
+  { name: "C",            Icon: SiC,          color: "#a8b9cc" },
+  { name: "Java",         Icon: FaJava,       color: "#007396" },
+  { name: "Python",       Icon: FaPython,     color: "#3776ab" },
 ];
 
 // ─── Projects ─────────────────────────────────────────────────
@@ -104,13 +103,16 @@ const PROJECTS = [
 const CERTS = [
   {
     img: "/certificate/certificate1.png",
-    title: "Frontend Web Development",
-    desc: "Successfully completed a professional frontend web development course focused on React, Next.js and modern UI/UX practices.",
+    title: "AI CodeLab Program 2026",
+    desc: "Awarded for gaining foundational knowledge of modern AI concepts, Agentic AI, and real-world AI solution design — organized by IEEE CS SEU SBC & Dept. of CSE, Southeast University in collaboration with Learn With Sumit.",
+    badge: "Certificate of Appreciation",
   },
   {
     img: "/certificate/certificate2.png",
-    title: "JavaScript & Responsive Design",
-    desc: "Completed advanced JavaScript and responsive web design training with hands-on real-world projects and interactive interfaces.",
+    title: "Introduction to CIP – OPSWAT Academy",
+    desc: "Successfully graduated from the Introduction to CIP (Critical Infrastructure Protection) program by OPSWAT Academy. Issued May 15, 2026 · Valid until May 15, 2027 · ID: OPA8kq55gg",
+    badge: "Verified Certificate",
+    verify: "https://learn.opswatacademy.com/certificate/OPA8kq55gg",
   },
 ];
 
@@ -140,13 +142,38 @@ const stagger = {
   show: { transition: { staggerChildren: 0.08 } },
 };
 
+// ─── Floating tech icon with pulse-in/out ─────────────────────
+function TechIcon({ Icon, top, left, size, index }) {
+  // Each icon gets a different cycle offset so they don't all appear together
+  const cycleDuration = 6 + (index % 5) * 1.5; // 6s – 12.5s visible+hidden cycle
+  const delay = (index * 1.3) % 8;
+
+  return (
+    <motion.div
+      style={{ position: "absolute", top, left }}
+      animate={{
+        opacity: [0, 0.09, 0.09, 0],
+        y: [0, -18, -18, 0],
+      }}
+      transition={{
+        duration: cycleDuration,
+        delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.25, 0.75, 1],
+      }}
+    >
+      <Icon size={size} style={{ color: "rgba(167,139,250,1)" }} />
+    </motion.div>
+  );
+}
+
 // ══════════════════════════════════════════════════════════════
 export default function Home() {
   const [activeSection, setActiveSection] = useState("Home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [formSent, setFormSent] = useState(false);
-  const sectionRefs = useRef({});
 
   // ── Intersection observer for active nav ──
   useEffect(() => {
@@ -180,7 +207,7 @@ export default function Home() {
   return (
     <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
 
-      {/* ── Background blobs ── */}
+      {/* ── Background blobs + tech icons ── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
         <div
           className="blob-1 absolute rounded-full"
@@ -209,15 +236,8 @@ export default function Home() {
             filter: "blur(40px)",
           }}
         />
-        {/* Tech background icons */}
-        {TECH_BG.map(({ Icon, top, left, size, dur, delay }, i) => (
-          <div
-            key={i}
-            className="tech-icon-float absolute"
-            style={{ top, left, "--duration": dur, "--delay": delay }}
-          >
-            <Icon size={size} style={{ color: "rgba(167,139,250,0.08)" }} />
-          </div>
+        {TECH_BG.map(({ Icon, top, left, size }, i) => (
+          <TechIcon key={i} Icon={Icon} top={top} left={left} size={size} index={i} />
         ))}
       </div>
 
@@ -239,7 +259,6 @@ export default function Home() {
             justifyContent: "space-between",
           }}
         >
-          {/* Brand */}
           <span
             className="glow-text"
             style={{ fontSize: 22, fontWeight: 700, letterSpacing: 1, cursor: "pointer" }}
@@ -248,24 +267,15 @@ export default function Home() {
             S. Fuad
           </span>
 
-          {/* Desktop nav */}
-          <ul
-            style={{ display: "flex", gap: 8, listStyle: "none" }}
-            className="hidden md:flex"
-          >
+          <ul style={{ display: "flex", gap: 8, listStyle: "none" }} className="hidden md:flex">
             {NAV_LINKS.map((link) => (
               <li key={link}>
                 <button
                   onClick={() => scrollTo(link.toLowerCase())}
                   style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "6px 14px",
-                    borderRadius: 8,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    letterSpacing: 0.3,
+                    background: "none", border: "none", cursor: "pointer",
+                    padding: "6px 14px", borderRadius: 8,
+                    fontSize: 14, fontWeight: 500, letterSpacing: 0.3,
                     transition: "all 0.25s ease",
                     color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)",
                     borderBottom: activeSection === link ? "2px solid var(--purple-glow)" : "2px solid transparent",
@@ -278,20 +288,15 @@ export default function Home() {
             ))}
           </ul>
 
-          {/* Hamburger */}
           <button
             className="md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{
-              background: "none", border: "none", cursor: "pointer",
-              color: "var(--text-primary)", padding: 8,
-            }}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-primary)", padding: 8 }}
           >
             {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
@@ -299,27 +304,18 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              style={{
-                background: "rgba(9,9,15,0.97)",
-                borderTop: "1px solid rgba(255,255,255,0.07)",
-                padding: "12px 0",
-              }}
+              style={{ background: "rgba(9,9,15,0.97)", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "12px 0" }}
             >
               {NAV_LINKS.map((link) => (
                 <button
                   key={link}
                   onClick={() => scrollTo(link.toLowerCase())}
                   style={{
-                    display: "block",
-                    width: "100%",
-                    textAlign: "left",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
+                    display: "block", width: "100%", textAlign: "left",
+                    background: "none", border: "none", cursor: "pointer",
                     padding: "12px 24px",
                     color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)",
-                    fontSize: 15,
-                    fontWeight: 500,
+                    fontSize: 15, fontWeight: 500,
                   }}
                 >
                   {link}
@@ -336,23 +332,15 @@ export default function Home() {
         style={{ transform: "translateY(-50%)" }}
       >
         {[
-          { Icon: FaGithub,   href: "https://github.com/Shadman-Shakib-Fuad",                                    label: "GitHub"    },
-          { Icon: FaLinkedin, href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/",             label: "LinkedIn"  },
-          { Icon: FaFacebook, href: "https://www.facebook.com/shadmanshakib.fuad",                               label: "Facebook"  },
-          { Icon: FaInstagram,href: "https://www.instagram.com/shadman.shakib.fuad/",                            label: "Instagram" },
+          { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad",                           label: "GitHub"    },
+          { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/",   label: "LinkedIn"  },
+          { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad",                     label: "Facebook"  },
+          { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/",                  label: "Instagram" },
         ].map(({ Icon, href, label }) => (
           <a
-            key={label}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-            className="social-icon glass-card"
-            style={{
-              width: 42, height: 42, borderRadius: "50%",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: "var(--purple-light)",
-            }}
+            key={label} href={href} target="_blank" rel="noopener noreferrer"
+            aria-label={label} className="social-icon glass-card"
+            style={{ width: 42, height: 42, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}
           >
             <Icon size={17} />
           </a>
@@ -365,70 +353,31 @@ export default function Home() {
       <section
         id="home"
         style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          paddingTop: 80,
-          position: "relative",
-          zIndex: 1,
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "80px 24px 60px",
+          minHeight: "100vh", display: "flex", alignItems: "center",
+          position: "relative", zIndex: 1,
+          maxWidth: 1200, margin: "0 auto", padding: "80px 24px 60px",
         }}
       >
         <div
           className="hero-two-col"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 40,
-            width: "100%",
-            flexWrap: "wrap",
-          }}
+          style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40, width: "100%", flexWrap: "wrap" }}
         >
-          {/* ── Left ── */}
+          {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             style={{ flex: "1 1 340px" }}
           >
-            <p
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                letterSpacing: 3,
-                textTransform: "uppercase",
-                color: "var(--purple-light)",
-                marginBottom: 12,
-              }}
-            >
+            <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "var(--purple-light)", marginBottom: 12 }}>
               Welcome to my Portfolio
             </p>
-            <h1
-              style={{
-                fontSize: "clamp(28px, 5vw, 52px)",
-                fontWeight: 800,
-                lineHeight: 1.15,
-                marginBottom: 16,
-              }}
-            >
-              Hi, I&apos;m{" "}
-              <span className="glow-text">Md. Shadman</span>
-              <br />
+            <h1 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 800, lineHeight: 1.15, marginBottom: 16 }}>
+              Hi, I&apos;m <span className="glow-text">Md. Shadman</span><br />
               <span style={{ color: "var(--text-primary)" }}>Shakib Fuad</span>
             </h1>
 
-            <div
-              style={{
-                fontSize: "clamp(16px, 2.5vw, 22px)",
-                fontWeight: 600,
-                marginBottom: 20,
-                color: "var(--purple-light)",
-                minHeight: 32,
-              }}
-            >
+            <div style={{ fontSize: "clamp(16px, 2.5vw, 22px)", fontWeight: 600, marginBottom: 20, color: "var(--purple-light)", minHeight: 32 }}>
               <TypeAnimation
                 sequence={[
                   "Frontend Web Developer", 2000,
@@ -437,157 +386,65 @@ export default function Home() {
                   "Creative UI Designer",   2000,
                   "CSE Student",            2000,
                 ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
+                wrapper="span" speed={50} repeat={Infinity}
               />
             </div>
 
-            <p
-              style={{
-                fontSize: 15,
-                lineHeight: 1.75,
-                color: "var(--text-secondary)",
-                marginBottom: 32,
-                maxWidth: 480,
-              }}
-            >
+            <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--text-secondary)", marginBottom: 32, maxWidth: 480 }}>
               Passionate Frontend Developer from Bangladesh focused on building
               beautiful, interactive and high-performance modern web applications
               with exceptional UI/UX experiences.
             </p>
 
-            {/* Buttons */}
-            <div
-              className="hero-btns"
-              style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}
-            >
+            <div className="hero-btns" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
               <button
                 className="glow-btn"
                 onClick={() => scrollTo("projects")}
-                style={{
-                  padding: "12px 24px",
-                  borderRadius: 10,
-                  background: "linear-gradient(135deg, #7c3aed, #2563eb)",
-                  border: "none",
-                  color: "#fff",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  cursor: "pointer",
-                  letterSpacing: 0.4,
-                }}
+                style={{ padding: "12px 24px", borderRadius: 10, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}
               >
                 Explore Projects
               </button>
               <button
                 className="glow-btn"
                 onClick={() => scrollTo("about")}
-                style={{
-                  padding: "12px 24px",
-                  borderRadius: 10,
-                  background: "transparent",
-                  border: "1px solid rgba(124,58,237,0.5)",
-                  color: "var(--purple-light)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  cursor: "pointer",
-                  letterSpacing: 0.4,
-                }}
+                style={{ padding: "12px 24px", borderRadius: 10, background: "transparent", border: "1px solid rgba(124,58,237,0.5)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}
               >
                 More About Me
               </button>
               <a
-                href="/cv/shadman-cv.pdf"
-                download
-                className="glow-btn"
-                style={{
-                  padding: "12px 24px",
-                  borderRadius: 10,
-                  background: "rgba(124,58,237,0.12)",
-                  border: "1px solid rgba(167,139,250,0.3)",
-                  color: "var(--purple-light)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  cursor: "pointer",
-                  letterSpacing: 0.4,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  textDecoration: "none",
-                }}
+                href="/cv/shadman-cv.pdf" download className="glow-btn"
+                style={{ padding: "12px 24px", borderRadius: 10, background: "rgba(124,58,237,0.12)", border: "1px solid rgba(167,139,250,0.3)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4, display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}
               >
                 <FaDownload size={13} /> Download CV
               </a>
             </div>
 
-            {/* Social row (mobile visible) */}
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               {[
-                { Icon: FaGithub,   href: "https://github.com/Shadman-Shakib-Fuad" },
-                { Icon: FaLinkedin, href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
-                { Icon: FaFacebook, href: "https://www.facebook.com/shadmanshakib.fuad" },
-                { Icon: FaInstagram,href: "https://www.instagram.com/shadman.shakib.fuad/" },
+                { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad" },
+                { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
+                { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad" },
+                { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/" },
               ].map(({ Icon, href }, i) => (
-                <a
-                  key={i}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon glass-card"
-                  style={{
-                    width: 40, height: 40, borderRadius: "50%",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: "var(--purple-light)",
-                  }}
-                >
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="social-icon glass-card"
+                  style={{ width: 40, height: 40, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
                   <Icon size={16} />
                 </a>
               ))}
             </div>
           </motion.div>
 
-          {/* ── Right: Profile Image ── */}
+          {/* Right: Profile */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
             style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}
           >
-            <div
-              className="float-anim"
-              style={{
-                position: "relative",
-                width: "clamp(240px, 30vw, 340px)",
-              }}
-            >
-              {/* Glow ring */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: -4,
-                  borderRadius: 24,
-                  background: "linear-gradient(135deg, #7c3aed, #2563eb, #7c3aed)",
-                  padding: 3,
-                  zIndex: 0,
-                  filter: "blur(2px)",
-                  opacity: 0.85,
-                }}
-              />
-              <div
-                style={{
-                  position: "relative",
-                  borderRadius: 22,
-                  overflow: "hidden",
-                  zIndex: 1,
-                  boxShadow: "0 0 40px rgba(124,58,237,0.4), 0 0 80px rgba(37,99,235,0.2)",
-                }}
-              >
-                <Image
-                  src={ownPic}
-                  alt="Md. Shadman Shakib Fuad"
-                  style={{ width: "100%", height: "auto", display: "block" }}
-                  priority
-                />
+            <div className="float-anim" style={{ position: "relative", width: "clamp(240px, 30vw, 340px)" }}>
+              <div style={{ position: "absolute", inset: -4, borderRadius: 24, background: "linear-gradient(135deg, #7c3aed, #2563eb, #7c3aed)", padding: 3, zIndex: 0, filter: "blur(2px)", opacity: 0.85 }} />
+              <div style={{ position: "relative", borderRadius: 22, overflow: "hidden", zIndex: 1, boxShadow: "0 0 40px rgba(124,58,237,0.4), 0 0 80px rgba(37,99,235,0.2)" }}>
+                <Image src={ownPic} alt="Md. Shadman Shakib Fuad" style={{ width: "100%", height: "auto", display: "block" }} priority />
               </div>
             </div>
           </motion.div>
@@ -601,29 +458,12 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionTitle title="Tech Arsenal" sub="Technologies I work with" />
           <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))",
-              gap: 16,
-              marginTop: 40,
-            }}
+            variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: 16, marginTop: 40 }}
           >
             {SKILLS.map(({ name, Icon, color }) => (
-              <motion.div
-                key={name}
-                variants={fadeUp}
-                className="glass-card skill-card"
-                style={{
-                  borderRadius: 14,
-                  padding: "20px 12px",
-                  textAlign: "center",
-                  cursor: "default",
-                }}
-              >
+              <motion.div key={name} variants={fadeUp} className="glass-card skill-card"
+                style={{ borderRadius: 14, padding: "20px 12px", textAlign: "center", cursor: "default" }}>
                 <Icon size={34} style={{ color, marginBottom: 10 }} />
                 <p style={{ fontSize: 13, fontWeight: 500, color: "var(--text-secondary)" }}>{name}</p>
               </motion.div>
@@ -632,44 +472,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ╔══════════════════════════════╗
-          ║           STATS              ║
-          ╚══════════════════════════════╝ */}
+      {/* ── Stats ── */}
       <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: 20,
-          }}
-        >
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
           {[
-            { num: "5+",   label: "Projects Completed",          icon: "🚀" },
+            { num: "5+",   label: "Projects Completed",             icon: "🚀" },
             { num: "6+",   label: "Months Learning Web Development", icon: "📚" },
-            { num: "100%", label: "Passion For Coding",           icon: "💜" },
+            { num: "100%", label: "Passion For Coding",              icon: "💜" },
           ].map(({ num, label, icon }) => (
-            <motion.div
-              key={label}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="glass-card stat-card"
-              style={{
-                borderRadius: 16,
-                padding: "28px 24px",
-                textAlign: "center",
-              }}
-            >
+            <motion.div key={label} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+              className="glass-card stat-card" style={{ borderRadius: 16, padding: "28px 24px", textAlign: "center" }}>
               <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
-              <p
-                className="glow-text"
-                style={{ fontSize: 36, fontWeight: 800, lineHeight: 1 }}
-              >
-                {num}
-              </p>
+              <p className="glow-text" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1 }}>{num}</p>
               <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8 }}>{label}</p>
             </motion.div>
           ))}
@@ -683,48 +497,20 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionTitle title="Featured Projects" sub="Things I've built" />
           <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: 22,
-              marginTop: 40,
-            }}
+            variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}
+            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 22, marginTop: 40 }}
           >
             {PROJECTS.map(({ title, url, desc, tag }) => (
-              <motion.div
-                key={title}
-                variants={fadeUp}
-                className="glass-card project-card"
-                style={{ borderRadius: 16, padding: 24, display: "flex", flexDirection: "column", gap: 12 }}
-              >
+              <motion.div key={title} variants={fadeUp} className="glass-card project-card"
+                style={{ borderRadius: 16, padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                   <h3 style={{ fontSize: 18, fontWeight: 700 }}>{title}</h3>
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "var(--purple-light)", transition: "color 0.2s" }}
-                  >
+                  <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}>
                     <FaExternalLinkAlt size={16} />
                   </a>
                 </div>
                 <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65 }}>{desc}</p>
-                <span
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 600,
-                    color: "var(--purple-light)",
-                    background: "rgba(124,58,237,0.12)",
-                    borderRadius: 6,
-                    padding: "4px 10px",
-                    alignSelf: "flex-start",
-                    letterSpacing: 0.5,
-                  }}
-                >
+                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "4px 10px", alignSelf: "flex-start", letterSpacing: 0.5 }}>
                   {tag}
                 </span>
               </motion.div>
@@ -740,34 +526,27 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionTitle title="Certificates" sub="Achievements & recognitions" />
           <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-              gap: 24,
-              marginTop: 40,
-            }}
+            variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}
+            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24, marginTop: 40 }}
           >
-            {CERTS.map(({ img, title, desc }) => (
-              <motion.div
-                key={title}
-                variants={fadeUp}
-                className="glass-card cert-card"
-                style={{ borderRadius: 16 }}
-              >
+            {CERTS.map(({ img, title, desc, badge, verify }) => (
+              <motion.div key={title} variants={fadeUp} className="glass-card cert-card" style={{ borderRadius: 16 }}>
                 <div style={{ overflow: "hidden", borderRadius: "16px 16px 0 0", maxHeight: 220 }}>
-                  <img
-                    src={img}
-                    alt={title}
-                    style={{ width: "100%", height: 220, objectFit: "cover", display: "block" }}
-                  />
+                  <img src={img} alt={title} style={{ width: "100%", height: 220, objectFit: "cover", display: "block" }} />
                 </div>
                 <div style={{ padding: 20 }}>
-                  <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{title}</h3>
-                  <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65 }}>{desc}</p>
+                  {/* Badge */}
+                  <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "3px 9px", letterSpacing: 0.4 }}>
+                    {badge}
+                  </span>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, margin: "10px 0 8px" }}>{title}</h3>
+                  <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65, marginBottom: verify ? 12 : 0 }}>{desc}</p>
+                  {verify && (
+                    <a href={verify} target="_blank" rel="noopener noreferrer"
+                      style={{ fontSize: 12, color: "var(--purple-light)", display: "flex", alignItems: "center", gap: 5, textDecoration: "none", fontWeight: 600 }}>
+                      <FaExternalLinkAlt size={11} /> Verify Certificate
+                    </a>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -783,63 +562,29 @@ export default function Home() {
           <SectionTitle title="Get In Touch" sub="I'd love to hear from you" />
           <motion.form
             onSubmit={handleForm}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }} viewport={{ once: true }}
             className="glass-card"
             style={{ borderRadius: 20, padding: 36, marginTop: 40, display: "flex", flexDirection: "column", gap: 18 }}
           >
             <div>
               <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Name</label>
-              <input
-                className="form-input"
-                type="text"
-                placeholder="Your full name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-              />
+              <input className="form-input" type="text" placeholder="Your full name"
+                value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
             </div>
             <div>
               <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Email</label>
-              <input
-                className="form-input"
-                type="email"
-                placeholder="your@email.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-              />
+              <input className="form-input" type="email" placeholder="your@email.com"
+                value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
             </div>
             <div>
               <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Message</label>
-              <textarea
-                className="form-input"
-                placeholder="Write your message..."
-                rows={5}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                required
-                style={{ resize: "vertical" }}
-              />
+              <textarea className="form-input" placeholder="Write your message..." rows={5}
+                value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                required style={{ resize: "vertical" }} />
             </div>
-            <button
-              type="submit"
-              className="glow-btn"
-              style={{
-                padding: "13px 0",
-                borderRadius: 10,
-                background: "linear-gradient(135deg, #7c3aed, #2563eb)",
-                border: "none",
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: 15,
-                cursor: "pointer",
-                letterSpacing: 0.5,
-                transition: "all 0.3s ease",
-              }}
-            >
+            <button type="submit" className="glow-btn"
+              style={{ padding: "13px 0", borderRadius: 10, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, transition: "all 0.3s ease" }}>
               {formSent ? "✅ Message Sent!" : "Send Message"}
             </button>
           </motion.form>
@@ -853,37 +598,13 @@ export default function Home() {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <SectionTitle title="Biography" sub="A little about me" />
           <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="glass-card"
-            style={{ borderRadius: 20, overflow: "hidden", marginTop: 40 }}
+            variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
+            className="glass-card" style={{ borderRadius: 20, overflow: "hidden", marginTop: 40 }}
           >
             {BIO.map(({ label, value }, i) => (
-              <motion.div
-                key={label}
-                variants={fadeUp}
-                className="bio-row"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "180px 1fr",
-                  padding: "16px 28px",
-                  borderBottom: i < BIO.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
-                  gap: 12,
-                  alignItems: "center",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: "var(--purple-light)",
-                    letterSpacing: 0.3,
-                  }}
-                >
-                  {label} :
-                </span>
+              <motion.div key={label} variants={fadeUp} className="bio-row"
+                style={{ display: "grid", gridTemplateColumns: "180px 1fr", padding: "16px 28px", borderBottom: i < BIO.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none", gap: 12, alignItems: "center" }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--purple-light)", letterSpacing: 0.3 }}>{label} :</span>
                 <span style={{ fontSize: 14, color: "var(--text-primary)", lineHeight: 1.6 }}>{value}</span>
               </motion.div>
             ))}
@@ -894,54 +615,24 @@ export default function Home() {
       {/* ╔══════════════════════════════╗
           ║           FOOTER             ║
           ╚══════════════════════════════╝ */}
-      <footer
-        style={{
-          position: "relative",
-          zIndex: 1,
-          borderTop: "1px solid rgba(124,58,237,0.25)",
-          boxShadow: "0 -1px 30px rgba(124,58,237,0.08)",
-          padding: "40px 24px 30px",
-          textAlign: "center",
-        }}
-      >
-        <p
-          className="glow-text"
-          style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}
-        >
-          Md. Shadman Shakib Fuad
-        </p>
-        <p style={{ fontSize: 13, color: "var(--purple-light)", marginBottom: 8 }}>
-          Frontend Web Developer
-        </p>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 20 }}>
-          Crafting modern digital experiences with code &amp; creativity.
-        </p>
+      <footer style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 -1px 30px rgba(124,58,237,0.08)", padding: "40px 24px 30px", textAlign: "center" }}>
+        <p className="glow-text" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>Md. Shadman Shakib Fuad</p>
+        <p style={{ fontSize: 13, color: "var(--purple-light)", marginBottom: 8 }}>Frontend Web Developer</p>
+        <p style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 20 }}>Crafting modern digital experiences with code &amp; creativity.</p>
         <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 24 }}>
           {[
-            { Icon: FaGithub,   href: "https://github.com/Shadman-Shakib-Fuad" },
-            { Icon: FaLinkedin, href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
-            { Icon: FaFacebook, href: "https://www.facebook.com/shadmanshakib.fuad" },
-            { Icon: FaInstagram,href: "https://www.instagram.com/shadman.shakib.fuad/" },
+            { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad" },
+            { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
+            { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad" },
+            { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/" },
           ].map(({ Icon, href }, i) => (
-            <a
-              key={i}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon glass-card"
-              style={{
-                width: 38, height: 38, borderRadius: "50%",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                color: "var(--purple-light)",
-              }}
-            >
+            <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="social-icon glass-card"
+              style={{ width: 38, height: 38, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
               <Icon size={15} />
             </a>
           ))}
         </div>
-        <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>
-          © 2026 All Rights Reserved
-        </p>
+        <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
       </footer>
 
     </div>
@@ -952,20 +643,14 @@ export default function Home() {
 function SectionTitle({ title, sub }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
+      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }} viewport={{ once: true }}
       style={{ textAlign: "center", marginBottom: 8 }}
     >
-      <h2
-        style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, marginBottom: 4 }}
-      >
+      <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, marginBottom: 4 }}>
         <span className="glow-text">{title}</span>
       </h2>
-      {sub && (
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", marginTop: 6 }}>{sub}</p>
-      )}
+      {sub && <p style={{ fontSize: 14, color: "var(--text-secondary)", marginTop: 6 }}>{sub}</p>}
       <div className="section-title-line" />
     </motion.div>
   );
