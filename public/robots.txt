@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://final-portfolio-two-beryl.vercel.app/sitemap.xml
