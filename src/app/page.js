@@ -144,23 +144,24 @@ const stagger = {
 
 // ─── Floating tech icon with pulse-in/out ─────────────────────
 function TechIcon({ Icon, top, left, size, index }) {
-  // Each icon gets a different cycle offset so they don't all appear together
-  const cycleDuration = 6 + (index % 5) * 1.5; // 6s – 12.5s visible+hidden cycle
-  const delay = (index * 1.3) % 8;
+  // Each icon floats in a unique direction continuously — no fade/vanish
+  const duration = 7 + (index % 6) * 1.4;
+  const delay = (index * 0.9) % 5;
+  const xRange = index % 2 === 0 ? [0, 12, -8, 0] : [0, -10, 14, 0];
+  const yRange = index % 3 === 0 ? [0, -16, -8, 0] : [0, -10, -20, 0];
 
   return (
     <motion.div
-      style={{ position: "absolute", top, left }}
+      style={{ position: "absolute", top, left, opacity: 0.09 }}
       animate={{
-        opacity: [0, 0.09, 0.09, 0],
-        y: [0, -18, -18, 0],
+        x: xRange,
+        y: yRange,
       }}
       transition={{
-        duration: cycleDuration,
+        duration,
         delay,
         repeat: Infinity,
         ease: "easeInOut",
-        times: [0, 0.25, 0.75, 1],
       }}
     >
       <Icon size={size} style={{ color: "rgba(167,139,250,1)" }} />
