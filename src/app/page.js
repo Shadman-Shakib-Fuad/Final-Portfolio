@@ -149,6 +149,15 @@ export default function Home() {
   const [menuOpen, setMenuOpen]           = useState(false);
   const [formData, setFormData]           = useState({ name: "", email: "", message: "" });
   const [formSent, setFormSent]           = useState(false);
+  const [visitors, setVisitors]           = useState(null);
+
+  // ── Visitor counter (countapi) ──
+  useEffect(() => {
+    fetch("https://api.countapi.xyz/hit/final-portfolio-two-beryl.vercel.app/visits")
+      .then((res) => res.json())
+      .then((data) => setVisitors(data.value))
+      .catch(() => setVisitors(null));
+  }, []);
 
   useEffect(() => {
     const observers = [];
@@ -179,6 +188,14 @@ export default function Home() {
 
   return (
     <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
+
+      {/* ── Pulse dot keyframe for Available badge ── */}
+      <style>{`
+        @keyframes pulse-dot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50%       { opacity: 0.4; transform: scale(1.4); }
+        }
+      `}</style>
 
       {/* ── Background blobs + tech icons ── */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -246,6 +263,31 @@ export default function Home() {
 
           {/* Left */}
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: "easeOut" }} style={{ flex: "1 1 340px" }}>
+            {/* ── Available for Hire badge ── */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}
+            >
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "rgba(34,197,94,0.1)",
+                border: "1px solid rgba(34,197,94,0.35)",
+                borderRadius: 50, padding: "6px 16px",
+                fontSize: 13, fontWeight: 600, color: "#4ade80",
+                letterSpacing: 0.5,
+              }}>
+                <span style={{
+                  width: 8, height: 8, borderRadius: "50%",
+                  background: "#4ade80",
+                  boxShadow: "0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.4)",
+                  display: "inline-block",
+                  animation: "pulse-dot 1.8s ease-in-out infinite",
+                }} />
+                Available for Hire
+              </span>
+            </motion.div>
             <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "var(--purple-light)", marginBottom: 12 }}>Welcome to my Portfolio</p>
             <h1 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 800, lineHeight: 1.15, marginBottom: 16 }}>
               Hi, I&apos;m <span className="glow-text">Md. Shadman</span><br />
@@ -464,6 +506,30 @@ export default function Home() {
             </a>
           ))}
         </div>
+        {/* ── Visitor Counter ── */}
+        {visitors !== null && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              background: "rgba(124,58,237,0.1)",
+              border: "1px solid rgba(124,58,237,0.2)",
+              borderRadius: 50, padding: "7px 18px",
+              marginBottom: 16, fontSize: 13,
+              color: "var(--text-secondary)",
+            }}
+          >
+            <span style={{ fontSize: 16 }}>👁️</span>
+            <span>
+              <span style={{ fontWeight: 700, color: "var(--purple-light)" }}>
+                {visitors.toLocaleString()}
+              </span>
+              {" "}total visitors
+            </span>
+          </motion.div>
+        )}
         <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
       </footer>
 
