@@ -151,12 +151,37 @@ export default function Home() {
   const [formSent, setFormSent]           = useState(false);
   const [visitors, setVisitors]           = useState(null);
 
-  // ── Visitor counter (countapi) ──
+  // ── Supabase visitor counter ──
   useEffect(() => {
-    fetch("https://api.countapi.xyz/hit/final-portfolio-two-beryl.vercel.app/visits")
-      .then((res) => res.json())
-      .then((data) => setVisitors(data.value))
-      .catch(() => setVisitors(null));
+    const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    async function trackVisit() {
+      try {
+        // Increment count
+        await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_visitor`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`,
+          },
+          body: JSON.stringify({}),
+        });
+        // Fetch updated count
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/visitors?select=count&id=eq.1`, {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`,
+          },
+        });
+        const data = await res.json();
+        if (data && data[0]) setVisitors(data[0].count);
+      } catch (e) {
+        console.error("Visitor counter error:", e);
+      }
+    }
+    trackVisit();
   }, []);
 
   useEffect(() => {
@@ -506,30 +531,34 @@ export default function Home() {
             </a>
           ))}
         </div>
-        {/* ── Visitor Counter ── */}
-        {visitors !== null && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              background: "rgba(124,58,237,0.1)",
-              border: "1px solid rgba(124,58,237,0.2)",
-              borderRadius: 50, padding: "7px 18px",
-              marginBottom: 16, fontSize: 13,
-              color: "var(--text-secondary)",
-            }}
-          >
-            <span style={{ fontSize: 16 }}>👁️</span>
-            <span>
-              <span style={{ fontWeight: 700, color: "var(--purple-light)" }}>
-                {visitors.toLocaleString()}
-              </span>
-              {" "}total visitors
-            </span>
-          </motion.div>
-        )}
+        {/* ── Real Visitor Counter (Supabase) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "rgba(124,58,237,0.1)",
+            border: "1px solid rgba(124,58,237,0.2)",
+            borderRadius: 50, padding: "7px 18px",
+            marginBottom: 16, fontSize: 13,
+            color: "var(--text-secondary)",
+          }}
+        >
+          <span style={{ fontSize: 16 }}>👁️</span>
+          <span>
+            {visitors !== null ? (
+              <>
+                <span style={{ fontWeight: 700, color: "var(--purple-light)" }}>
+                  {visitors.toLocaleString()}
+                </span>
+                {" "}total visitors
+              </>
+            ) : (
+              <span style={{ color: "var(--text-secondary)" }}>Loading visitors...</span>
+            )}
+          </span>
+        </motion.div>
         <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
       </footer>
 
