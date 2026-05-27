@@ -153,32 +153,44 @@ export default function Home() {
 
   // ── Supabase visitor counter ──
   useEffect(() => {
-    const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const SUPABASE_URL = "https://fekyjxjavcdhjhfenwtt.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZla3lqeGphdmNkaGpoZmVud3R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NDk1ODksImV4cCI6MjA5NTQyNTU4OX0.qGLcBAcclezmimxQUmo6_r3qHpAe_pTaVnacCe7dLJ8";
 
     async function trackVisit() {
       try {
-        // Increment count
-        await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_visitor`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
-          },
-          body: JSON.stringify({}),
-        });
-        // Fetch updated count
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/visitors?select=count&id=eq.1`, {
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
-          },
-        });
-        const data = await res.json();
-        if (data && data[0]) setVisitors(data[0].count);
+        // Step 1: get current count
+        const getRes = await fetch(
+          `${SUPABASE_URL}/rest/v1/visitors?select=count&id=eq.1`,
+          {
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${SUPABASE_KEY}`,
+            },
+          }
+        );
+        const getData = await getRes.json();
+        const currentCount = getData?.[0]?.count ?? 0;
+        const newCount = currentCount + 1;
+
+        // Step 2: update with new count
+        await fetch(
+          `${SUPABASE_URL}/rest/v1/visitors?id=eq.1`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${SUPABASE_KEY}`,
+              "Prefer": "return=minimal",
+            },
+            body: JSON.stringify({ count: newCount }),
+          }
+        );
+
+        setVisitors(newCount);
       } catch (e) {
         console.error("Visitor counter error:", e);
+        setVisitors("—");
       }
     }
     trackVisit();
