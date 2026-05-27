@@ -16,10 +16,8 @@ import {
 } from "react-icons/si";
 import ownPic from "../picture/own-pic.png";
 
-// ─── Nav links ────────────────────────────────────────────────
 const NAV_LINKS = ["Home", "Skills", "Projects", "Certificates", "Contact", "About"];
 
-// ─── Tech background icons — more icons, spread all over ─────
 const TECH_BG = [
   { Icon: FaReact,       top: "5%",  left: "4%",   size: 52 },
   { Icon: FaHtml5,       top: "10%", left: "88%",  size: 48 },
@@ -45,7 +43,6 @@ const TECH_BG = [
   { Icon: FaPython,      top: "30%", left: "30%",  size: 36 },
 ];
 
-// ─── Skills ───────────────────────────────────────────────────
 const SKILLS = [
   { name: "HTML5",        Icon: FaHtml5,       color: "#e34f26" },
   { name: "CSS3",         Icon: FaCss3Alt,     color: "#264de4" },
@@ -64,15 +61,38 @@ const SKILLS = [
   { name: "Python",       Icon: FaPython,      color: "#3776ab" },
 ];
 
-// ─── Projects ─────────────────────────────────────────────────
+// ── Projects with preview screenshots ──
 const PROJECTS = [
-  { title: "DocAppoint",     url: "https://doc-appoint-olive.vercel.app/",         desc: "Modern Doctor Appointment Booking Platform.",      tag: "Healthcare · React · Firebase"   },
-  { title: "Mango",          url: "https://mango-sage.vercel.app/",                desc: "Modern online bookstore web application.",          tag: "E-Commerce · Next.js · Tailwind"  },
-  { title: "React Website",  url: "https://cozy-pika-83908a.netlify.app/",         desc: "Creative React based animated UI website.",         tag: "UI · React · Framer Motion"       },
-  { title: "Creative Agency",url: "https://prismatic-pie-cf7807.netlify.app/",     desc: "Animated digital agency landing page.",             tag: "Agency · Animation · CSS"         },
+  {
+    title: "DocAppoint",
+    url: "https://doc-appoint-olive.vercel.app/",
+    desc: "Modern Doctor Appointment Booking Platform.",
+    tag: "Healthcare · React · Firebase",
+    preview: "/projects/docappoint.png",
+  },
+  {
+    title: "Mango",
+    url: "https://mango-sage.vercel.app/",
+    desc: "Modern online bookstore web application.",
+    tag: "E-Commerce · Next.js · Tailwind",
+    preview: "/projects/mango.png",
+  },
+  {
+    title: "React Website",
+    url: "https://cozy-pika-83908a.netlify.app/",
+    desc: "Creative React based animated UI website.",
+    tag: "UI · React · Framer Motion",
+    preview: "/projects/react-website.png",
+  },
+  {
+    title: "Creative Agency",
+    url: "https://prismatic-pie-cf7807.netlify.app/",
+    desc: "Animated digital agency landing page.",
+    tag: "Agency · Animation · CSS",
+    preview: "/projects/creative-agency.png",
+  },
 ];
 
-// ─── Certificates ─────────────────────────────────────────────
 const CERTS = [
   {
     img: "/certificate/certificate1.png",
@@ -89,7 +109,6 @@ const CERTS = [
   },
 ];
 
-// ─── Biography ────────────────────────────────────────────────
 const BIO = [
   { label: "Full Name",        value: "Md. Shadman Shakib Fuad" },
   { label: "Current Location", value: "Dhaka, Bangladesh" },
@@ -105,33 +124,25 @@ const BIO = [
   { label: "Dream",            value: "To become a globally recognized Software Engineer and build impactful digital products for millions of users." },
 ];
 
-// ─── Animation variants ───────────────────────────────────────
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
 };
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 
-// ─── TechIcon: always visible, moves bigger distance ─────────
 function TechIcon({ Icon, top, left, size, index }) {
   const duration = 6 + (index % 7) * 1.2;
   const delay    = (index * 0.85) % 6;
-
-  // Different movement patterns per icon for natural feel
   const patterns = [
-    { x: [0,  35, -22,  18, 0], y: [0, -28,  -42,  -14, 0] },
-    { x: [0, -30,  20, -10, 0], y: [0, -20,  -38,  -26, 0] },
-    { x: [0,  20, -38,   8, 0], y: [0, -36,  -18,  -44, 0] },
-    { x: [0, -18,  30, -28, 0], y: [0, -44,  -22,  -10, 0] },
-    { x: [0,  28, -12,  36, 0], y: [0, -16,  -40,  -28, 0] },
-    { x: [0, -24,  16, -32, 0], y: [0, -38,  -10,  -46, 0] },
-    { x: [0,  16, -36,  24, 0], y: [0, -42,  -24,  -16, 0] },
+    { x: [0,  35, -22,  18, 0], y: [0, -28, -42, -14, 0] },
+    { x: [0, -30,  20, -10, 0], y: [0, -20, -38, -26, 0] },
+    { x: [0,  20, -38,   8, 0], y: [0, -36, -18, -44, 0] },
+    { x: [0, -18,  30, -28, 0], y: [0, -44, -22, -10, 0] },
+    { x: [0,  28, -12,  36, 0], y: [0, -16, -40, -28, 0] },
+    { x: [0, -24,  16, -32, 0], y: [0, -38, -10, -46, 0] },
+    { x: [0,  16, -36,  24, 0], y: [0, -42, -24, -16, 0] },
   ];
   const { x, y } = patterns[index % patterns.length];
-
   return (
     <motion.div
       style={{ position: "absolute", top, left, opacity: 0.1 }}
@@ -139,6 +150,83 @@ function TechIcon({ Icon, top, left, size, index }) {
       transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
     >
       <Icon size={size} style={{ color: "rgba(167,139,250,1)" }} />
+    </motion.div>
+  );
+}
+
+// ── Project card with hover preview ──────────────────────────
+function ProjectCard({ title, url, desc, tag, preview }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <motion.div
+      variants={fadeUp}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        borderRadius: 16, overflow: "hidden",
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        backdropFilter: "blur(12px)",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        transform: hovered ? "translateY(-6px)" : "translateY(0)",
+        boxShadow: hovered ? "0 0 30px rgba(124,58,237,0.3)" : "none",
+      }}
+    >
+      {/* Screenshot */}
+      <div style={{ position: "relative", height: 180, overflow: "hidden", background: "#0d0d1a" }}>
+        <img
+          src={preview}
+          alt={title}
+          style={{
+            width: "100%", height: "100%",
+            objectFit: "cover", objectPosition: "top",
+            transition: "transform 0.5s ease",
+            transform: hovered ? "scale(1.06)" : "scale(1)",
+          }}
+        />
+        {/* Hover overlay */}
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              style={{
+                position: "absolute", inset: 0,
+                background: "rgba(124,58,237,0.75)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}
+            >
+              <a
+                href={url} target="_blank" rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  display: "flex", alignItems: "center", gap: 8,
+                  background: "#fff", color: "#7c3aed",
+                  padding: "10px 22px", borderRadius: 50,
+                  fontWeight: 700, fontSize: 14, textDecoration: "none",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+                }}
+              >
+                <FaExternalLinkAlt size={13} /> Live Preview
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Card body */}
+      <div style={{ padding: "18px 20px", display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)" }}>{title}</h3>
+          <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}>
+            <FaExternalLinkAlt size={14} />
+          </a>
+        </div>
+        <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65 }}>{desc}</p>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "4px 10px", alignSelf: "flex-start", letterSpacing: 0.5 }}>
+          {tag}
+        </span>
+      </div>
     </motion.div>
   );
 }
@@ -155,43 +243,20 @@ export default function Home() {
   useEffect(() => {
     const SUPABASE_URL = "https://fekyjxjavcdhjhfenwtt.supabase.co";
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZla3lqeGphdmNkaGpoZmVud3R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NDk1ODksImV4cCI6MjA5NTQyNTU4OX0.qGLcBAcclezmimxQUmo6_r3qHpAe_pTaVnacCe7dLJ8";
-
     async function trackVisit() {
       try {
-        // Step 1: get current count
-        const getRes = await fetch(
-          `${SUPABASE_URL}/rest/v1/visitors?select=count&id=eq.1`,
-          {
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization": `Bearer ${SUPABASE_KEY}`,
-            },
-          }
-        );
+        const getRes = await fetch(`${SUPABASE_URL}/rest/v1/visitors?select=count&id=eq.1`, {
+          headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` },
+        });
         const getData = await getRes.json();
-        const currentCount = getData?.[0]?.count ?? 0;
-        const newCount = currentCount + 1;
-
-        // Step 2: update with new count
-        await fetch(
-          `${SUPABASE_URL}/rest/v1/visitors?id=eq.1`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              "apikey": SUPABASE_KEY,
-              "Authorization": `Bearer ${SUPABASE_KEY}`,
-              "Prefer": "return=minimal",
-            },
-            body: JSON.stringify({ count: newCount }),
-          }
-        );
-
+        const newCount = (getData?.[0]?.count ?? 0) + 1;
+        await fetch(`${SUPABASE_URL}/rest/v1/visitors?id=eq.1`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json", "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Prefer": "return=minimal" },
+          body: JSON.stringify({ count: newCount }),
+        });
         setVisitors(newCount);
-      } catch (e) {
-        console.error("Visitor counter error:", e);
-        setVisitors("—");
-      }
+      } catch (e) { setVisitors("—"); }
     }
     trackVisit();
   }, []);
@@ -226,7 +291,6 @@ export default function Home() {
   return (
     <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
 
-      {/* ── Pulse dot keyframe for Available badge ── */}
       <style>{`
         @keyframes pulse-dot {
           0%, 100% { opacity: 1; transform: scale(1); }
@@ -244,9 +308,7 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ╔══════════════╗
-          ║    NAVBAR    ║
-          ╚══════════════╝ */}
+      {/* NAVBAR */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-card" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span className="glow-text" style={{ fontSize: 22, fontWeight: 700, letterSpacing: 1, cursor: "pointer" }} onClick={() => scrollTo("home")}>
@@ -278,7 +340,7 @@ export default function Home() {
         </AnimatePresence>
       </nav>
 
-      {/* ── Social Sidebar ── */}
+      {/* Social Sidebar */}
       <div className="social-sidebar fixed right-5 top-1/2 z-40 flex flex-col gap-3" style={{ transform: "translateY(-50%)" }}>
         {[
           { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad",                         label: "GitHub"    },
@@ -292,36 +354,13 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ╔══════════════╗
-          ║     HERO     ║
-          ╚══════════════╝ */}
+      {/* HERO */}
       <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "80px 24px 60px" }}>
         <div className="hero-two-col" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40, width: "100%", flexWrap: "wrap" }}>
-
-          {/* Left */}
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: "easeOut" }} style={{ flex: "1 1 340px" }}>
-            {/* ── Available for Hire badge ── */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}
-            >
-              <span style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                background: "rgba(34,197,94,0.1)",
-                border: "1px solid rgba(34,197,94,0.35)",
-                borderRadius: 50, padding: "6px 16px",
-                fontSize: 13, fontWeight: 600, color: "#4ade80",
-                letterSpacing: 0.5,
-              }}>
-                <span style={{
-                  width: 8, height: 8, borderRadius: "50%",
-                  background: "#4ade80",
-                  boxShadow: "0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.4)",
-                  display: "inline-block",
-                  animation: "pulse-dot 1.8s ease-in-out infinite",
-                }} />
+            <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: 50, padding: "6px 16px", fontSize: 13, fontWeight: 600, color: "#4ade80", letterSpacing: 0.5 }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.4)", display: "inline-block", animation: "pulse-dot 1.8s ease-in-out infinite" }} />
                 Available for Hire
               </span>
             </motion.div>
@@ -357,7 +396,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right: Profile */}
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }} style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
             <div className="float-anim" style={{ position: "relative", width: "clamp(240px, 30vw, 340px)" }}>
               <div style={{ position: "absolute", inset: -4, borderRadius: 24, background: "linear-gradient(135deg, #7c3aed, #2563eb, #7c3aed)", padding: 3, zIndex: 0, filter: "blur(2px)", opacity: 0.85 }} />
@@ -366,13 +404,10 @@ export default function Home() {
               </div>
             </div>
           </motion.div>
-
         </div>
       </section>
 
-      {/* ╔══════════════╗
-          ║    SKILLS    ║
-          ╚══════════════╝ */}
+      {/* SKILLS */}
       <section id="skills" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionTitle title="Tech Arsenal" sub="Technologies I work with" />
@@ -387,7 +422,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Stats ── */}
+      {/* STATS */}
       <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
           {[
@@ -404,69 +439,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ╔══════════════╗
-          ║   PROJECTS   ║
-          ╚══════════════╝ */}
+      {/* PROJECTS */}
       <section id="projects" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionTitle title="Featured Projects" sub="Things I've built" />
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 22, marginTop: 40 }}>
-            {PROJECTS.map(({ title, url, desc, tag }) => (
-              <motion.div key={title} variants={fadeUp} className="glass-card project-card" style={{ borderRadius: 16, padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                  <h3 style={{ fontSize: 18, fontWeight: 700 }}>{title}</h3>
-                  <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}>
-                    <FaExternalLinkAlt size={16} />
-                  </a>
-                </div>
-                <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65 }}>{desc}</p>
-                <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "4px 10px", alignSelf: "flex-start", letterSpacing: 0.5 }}>{tag}</span>
-              </motion.div>
-            ))}
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24, marginTop: 40 }}>
+            {PROJECTS.map((p) => <ProjectCard key={p.title} {...p} />)}
           </motion.div>
         </div>
       </section>
 
-      {/* ╔════════════════════╗
-          ║    CERTIFICATES    ║
-          ╚════════════════════╝ */}
+      {/* CERTIFICATES */}
       <section id="certificates" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <SectionTitle title="Certificates" sub="Achievements & recognitions" />
-
-          {/* ── Centered flex row, equal space both sides ── */}
-          <motion.div
-            variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "stretch",
-              gap: 36,
-              marginTop: 40,
-            }}
-          >
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}
+            style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "stretch", gap: 36, marginTop: 40 }}>
             {CERTS.map(({ img, title, desc, badge, verify }) => (
-              <motion.div
-                key={title}
-                variants={fadeUp}
-                className="glass-card cert-card"
-                style={{
-                  borderRadius: 18,
-                  width: 420,
-                  maxWidth: "100%",
-                  flexShrink: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
+              <motion.div key={title} variants={fadeUp} className="glass-card cert-card"
+                style={{ borderRadius: 18, width: 420, maxWidth: "100%", flexShrink: 0, display: "flex", flexDirection: "column" }}>
                 <div style={{ overflow: "hidden", borderRadius: "18px 18px 0 0", height: 230, flexShrink: 0 }}>
                   <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 </div>
                 <div style={{ padding: 22, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "3px 10px", letterSpacing: 0.4, alignSelf: "flex-start" }}>
-                    {badge}
-                  </span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "3px 10px", letterSpacing: 0.4, alignSelf: "flex-start" }}>{badge}</span>
                   <h3 style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.4 }}>{title}</h3>
                   <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, flex: 1 }}>{desc}</p>
                   {verify && (
@@ -481,9 +477,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ╔══════════════╗
-          ║   CONTACT    ║
-          ╚══════════════╝ */}
+      {/* CONTACT */}
       <section id="contact" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
         <div style={{ maxWidth: 600, margin: "0 auto" }}>
           <SectionTitle title="Get In Touch" sub="I'd love to hear from you" />
@@ -507,9 +501,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ╔══════════════╗
-          ║  BIOGRAPHY   ║
-          ╚══════════════╝ */}
+      {/* BIOGRAPHY */}
       <section id="about" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <SectionTitle title="Biography" sub="A little about me" />
@@ -524,9 +516,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ╔══════════════╗
-          ║    FOOTER    ║
-          ╚══════════════╝ */}
+      {/* FOOTER */}
       <footer style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 -1px 30px rgba(124,58,237,0.08)", padding: "40px 24px 30px", textAlign: "center" }}>
         <p className="glow-text" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>Md. Shadman Shakib Fuad</p>
         <p style={{ fontSize: 13, color: "var(--purple-light)", marginBottom: 8 }}>Frontend Web Developer</p>
@@ -543,31 +533,14 @@ export default function Home() {
             </a>
           ))}
         </div>
-        {/* ── Real Visitor Counter (Supabase) ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
-            background: "rgba(124,58,237,0.1)",
-            border: "1px solid rgba(124,58,237,0.2)",
-            borderRadius: 50, padding: "7px 18px",
-            marginBottom: 16, fontSize: 13,
-            color: "var(--text-secondary)",
-          }}
-        >
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+          style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 50, padding: "7px 18px", marginBottom: 16, fontSize: 13, color: "var(--text-secondary)" }}>
           <span style={{ fontSize: 16 }}>👁️</span>
           <span>
             {visitors !== null ? (
-              <>
-                <span style={{ fontWeight: 700, color: "var(--purple-light)" }}>
-                  {visitors.toLocaleString()}
-                </span>
-                {" "}total visitors
-              </>
+              <><span style={{ fontWeight: 700, color: "var(--purple-light)" }}>{typeof visitors === "number" ? visitors.toLocaleString() : visitors}</span>{" "}total visitors</>
             ) : (
-              <span style={{ color: "var(--text-secondary)" }}>Loading visitors...</span>
+              <span>Loading visitors...</span>
             )}
           </span>
         </motion.div>
@@ -578,7 +551,6 @@ export default function Home() {
   );
 }
 
-// ─── Section Title helper ─────────────────────────────────────
 function SectionTitle({ title, sub }) {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 8 }}>
