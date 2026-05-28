@@ -68,28 +68,28 @@ const PROJECTS = [
     url: "https://doc-appoint-olive.vercel.app/",
     desc: "Modern Doctor Appointment Booking Platform.",
     tag: "Healthcare · React · Firebase",
-    preview: "/projects/docappoint.png",
+    preview: "/projects/docappoint.PNG",
   },
   {
     title: "Mango",
     url: "https://mango-sage.vercel.app/",
     desc: "Modern online bookstore web application.",
     tag: "E-Commerce · Next.js · Tailwind",
-    preview: "/projects/mango.png",
+    preview: "/projects/mango.PNG",
   },
   {
     title: "React Website",
     url: "https://cozy-pika-83908a.netlify.app/",
     desc: "Creative React based animated UI website.",
     tag: "UI · React · Framer Motion",
-    preview: "/projects/react-website.png",
+    preview: "/projects/react-website.PNG",
   },
   {
     title: "Creative Agency",
     url: "https://prismatic-pie-cf7807.netlify.app/",
     desc: "Animated digital agency landing page.",
     tag: "Agency · Animation · CSS",
-    preview: "/projects/creative-agency.png",
+    preview: "/projects/creative-agency.PNG",
   },
 ];
 
