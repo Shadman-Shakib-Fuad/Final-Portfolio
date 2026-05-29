@@ -290,7 +290,7 @@ export default function Home() {
     setSendError(false);
     try {
       await emailjs.send(
-        "service_ga98u9m",
+        "service_2h3vw28",
         "template_i5hkx8p",
         {
           name:    formData.name,
@@ -303,7 +303,9 @@ export default function Home() {
       setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setFormSent(false), 4000);
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error("EmailJS error status:", err?.status);
+      console.error("EmailJS error text:", err?.text);
+      console.error("EmailJS full error:", JSON.stringify(err));
       setSendError(true);
       setTimeout(() => setSendError(false), 4000);
     } finally {
