@@ -14,6 +14,7 @@ import {
   SiNextdotjs, SiTailwindcss, SiFirebase,
   SiMongodb, SiExpress, SiC,
 } from "react-icons/si";
+import emailjs from "@emailjs/browser";
 import ownPic from "../picture/own-pic.png";
 
 const NAV_LINKS = ["Home", "Skills", "Projects", "Certificates", "Contact", "About"];
@@ -237,6 +238,8 @@ export default function Home() {
   const [menuOpen, setMenuOpen]           = useState(false);
   const [formData, setFormData]           = useState({ name: "", email: "", message: "" });
   const [formSent, setFormSent]           = useState(false);
+  const [sending, setSending]             = useState(false);
+  const [sendError, setSendError]         = useState(false);
   const [visitors, setVisitors]           = useState(null);
 
   // ── Supabase visitor counter ──
@@ -281,11 +284,31 @@ export default function Home() {
     setMenuOpen(false);
   };
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
-    setFormSent(true);
-    setTimeout(() => setFormSent(false), 3000);
-    setFormData({ name: "", email: "", message: "" });
+    setSending(true);
+    setSendError(false);
+    try {
+      await emailjs.send(
+        "service_ga98u9m",
+        "template_i5hkx8p",
+        {
+          name:    formData.name,
+          email:   formData.email,
+          message: formData.message,
+        },
+        "nThbPmTInbz7ZviEd"
+      );
+      setFormSent(true);
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setFormSent(false), 4000);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setSendError(true);
+      setTimeout(() => setSendError(false), 4000);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -494,8 +517,8 @@ export default function Home() {
               <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Message</label>
               <textarea className="form-input" placeholder="Write your message..." rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required style={{ resize: "vertical" }} />
             </div>
-            <button type="submit" className="glow-btn" style={{ padding: "13px 0", borderRadius: 10, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, transition: "all 0.3s ease" }}>
-              {formSent ? "✅ Message Sent!" : "Send Message"}
+            <button type="submit" disabled={sending} className="glow-btn" style={{ padding: "13px 0", borderRadius: 10, background: sending ? "rgba(124,58,237,0.5)" : "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: sending ? "not-allowed" : "pointer", letterSpacing: 0.5, transition: "all 0.3s ease", opacity: sending ? 0.7 : 1 }}>
+              {sending ? "⏳ Sending..." : formSent ? "✅ Message Sent!" : sendError ? "❌ Failed! Try Again" : "Send Message"}
             </button>
           </motion.form>
         </div>
