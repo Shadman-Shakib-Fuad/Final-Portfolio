@@ -14,7 +14,6 @@ import {
   SiNextdotjs, SiTailwindcss, SiFirebase,
   SiMongodb, SiExpress, SiC,
 } from "react-icons/si";
-import emailjs from "@emailjs/browser";
 import ownPic from "../picture/own-pic.png";
 
 const NAV_LINKS = ["Home", "Skills", "Projects", "Certificates", "Contact", "About"];
@@ -112,9 +111,9 @@ const CERTS = [
 
 const BIO = [
   { label: "Full Name",        value: "Md. Shadman Shakib Fuad" },
-  { label: "Current Location", value: "Mohakhali, Dhaka, Bangladesh" },
-  { label: "Hometown",         value: "C.O. Bazar, Rangpur, Bangladesh" },
-  { label: "University",       value: "Southeast University – Department of CSE" },
+  { label: "Current Location", value: "Dhaka, Bangladesh" },
+  { label: "Hometown",         value: "Rangpur, Bangladesh" },
+  { label: "University",       value: "SouthEast University – Department of CSE" },
   { label: "Date of Birth",    value: "09 May 2004" },
   { label: "School",           value: "Bir Uttam Shaheed Samad School & College, Rangpur" },
   { label: "College",          value: "Cantonment Public School & College, Rangpur" },
@@ -289,23 +288,18 @@ export default function Home() {
     setSending(true);
     setSendError(false);
     try {
-      await emailjs.send(
-        "service_2h3vw28",
-        "template_i5hkx8p",
-        {
-          name:    formData.name,
-          email:   formData.email,
-          message: formData.message,
-        },
-        "nThbPmTInbz7ZviEd"
-      );
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed");
       setFormSent(true);
       setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setFormSent(false), 4000);
     } catch (err) {
-      console.error("EmailJS error status:", err?.status);
-      console.error("EmailJS error text:", err?.text);
-      console.error("EmailJS full error:", JSON.stringify(err));
+      console.error("Send error:", err);
       setSendError(true);
       setTimeout(() => setSendError(false), 4000);
     } finally {
