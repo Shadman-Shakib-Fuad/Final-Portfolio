@@ -76,7 +76,7 @@ const CERTS = [
 
 // ── Education & Experience Timeline ──────────────────────────
 const TIMELINE = [
-  { year: "2024", title: "B.Sc",  subtitle: "Computer Science & Engineering",       desc: "SouthEast University, Dhaka — Currently Running",         result: "Running ⚡", Icon: FaUniversity,    color: "#f472b6" },
+  { year: "2024", title: "B.Sc",  subtitle: "Computer Science & Engineering",       desc: "Southeast University, Dhaka — Currently Running",         result: "Running ⚡", Icon: FaUniversity,    color: "#f472b6" },
   { year: "2022", title: "HSC",   subtitle: "Higher Secondary Certificate",         desc: "Cantonment Public School & College, Rangpur",             result: "GPA 5.00",  Icon: FaGraduationCap, color: "#f59e0b" },
   { year: "2020", title: "SSC",   subtitle: "Secondary School Certificate",         desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00",  Icon: FaGraduationCap, color: "#34d399" },
   { year: "2017", title: "JSC",   subtitle: "Junior School Certificate",            desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00",  Icon: FaSchool,        color: "#60a5fa" },
@@ -87,7 +87,7 @@ const BIO = [
   { label: "Full Name",        value: "Md. Shadman Shakib Fuad" },
   { label: "Current Location", value: "Mohakhali, Dhaka, Bangladesh" },
   { label: "Hometown",         value: "C.O. Bazar, Rangpur, Bangladesh" },
-  { label: "University",       value: "SouthEast University – Department of CSE" },
+  { label: "University",       value: "Southeast University – Department of CSE" },
   { label: "Date of Birth",    value: "09 May 2004" },
   { label: "School",           value: "Bir Uttam Shaheed Samad School & College, Rangpur" },
   { label: "College",          value: "Cantonment Public School & College, Rangpur" },
@@ -137,7 +137,9 @@ function LoadingScreen({ onDone }) {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
-            letterSpacing: 2,
+            letterSpacing: 6,
+            fontFamily: "'Playfair Display', 'Georgia', serif",
+            fontStyle: "italic",
           }}
           animate={{ opacity: [0.6, 1, 0.6] }}
           transition={{ duration: 1.5, repeat: Infinity }}
@@ -338,6 +340,8 @@ function GitHubStats() {
 // ════════════════════════════════════════════════════════════════
 export default function Home() {
   const [loading, setLoading]             = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showTop, setShowTop]               = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
   const [menuOpen, setMenuOpen]           = useState(false);
   const [formData, setFormData]           = useState({ name: "", email: "", message: "" });
@@ -374,6 +378,18 @@ export default function Home() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  // ── Scroll progress + back to top ──
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop  = window.scrollY;
+      const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+      setShowTop(scrollTop > 400);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollTo = (id) => { document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
 
   const handleForm = async (e) => {
@@ -402,6 +418,7 @@ export default function Home() {
 
       <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
         <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&display=swap');
           @keyframes pulse-dot {
             0%, 100% { opacity: 1; transform: scale(1); }
             50%       { opacity: 0.4; transform: scale(1.4); }
@@ -721,6 +738,33 @@ export default function Home() {
           </motion.div>
           <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
         </footer>
+
+      {/* ── Back to Top Button ── */}
+        <AnimatePresence>
+          {showTop && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.5, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.5, y: 20 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              style={{
+                position: "fixed", bottom: 32, right: 24, zIndex: 50,
+                width: 46, height: 46, borderRadius: "50%",
+                background: "linear-gradient(135deg, #7c3aed, #2563eb)",
+                border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: "0 0 20px rgba(124,58,237,0.5)",
+                color: "#fff", fontSize: 18,
+              }}
+              whileHover={{ scale: 1.15, boxShadow: "0 0 28px rgba(124,58,237,0.7)" }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Back to top"
+            >
+              ↑
+            </motion.button>
+          )}
+        </AnimatePresence>
 
       </div>
     </>
