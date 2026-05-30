@@ -220,6 +220,121 @@ function ProjectCard({ title, url, desc, tag, preview }) {
   );
 }
 
+// ── GitHub Stats Component ────────────────────────────────────
+function GitHubStats() {
+  const [stats, setStats] = useState(null);
+  const [repos, setRepos]  = useState([]);
+
+  useEffect(() => {
+    // Fetch user stats
+    fetch("https://api.github.com/users/Shadman-Shakib-Fuad")
+      .then((r) => r.json())
+      .then((d) => setStats(d))
+      .catch(() => {});
+
+    // Fetch repos for language count
+    fetch("https://api.github.com/users/Shadman-Shakib-Fuad/repos?per_page=100")
+      .then((r) => r.json())
+      .then((d) => Array.isArray(d) && setRepos(d))
+      .catch(() => {});
+  }, []);
+
+  // Count total commits approximation from public repos
+  const totalRepos   = stats?.public_repos ?? "—";
+  const followers    = stats?.followers ?? "—";
+  const following    = stats?.following ?? "—";
+  const totalStars   = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
+
+  // Top languages
+  const langMap = {};
+  repos.forEach((r) => { if (r.language) langMap[r.language] = (langMap[r.language] || 0) + 1; });
+  const topLangs = Object.entries(langMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const langColors = { JavaScript: "#f7df1e", TypeScript: "#3178c6", Python: "#3776ab", CSS: "#264de4", HTML: "#e34f26", "C++": "#a8b9cc", Java: "#007396", C: "#a8b9cc", Rust: "#ce412b", Go: "#00add8" };
+
+  const statItems = [
+    { label: "Public Repos",  value: totalRepos, icon: "📁" },
+    { label: "Total Stars",   value: totalStars || "0", icon: "⭐" },
+    { label: "Followers",     value: followers,  icon: "👥" },
+    { label: "Following",     value: following,  icon: "➕" },
+  ];
+
+  return (
+    <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+        <SectionTitle title="GitHub Activity" sub="My open source contributions" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }} viewport={{ once: true }}
+          style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 24 }}
+        >
+          {/* Stat cards */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+            {statItems.map(({ label, value, icon }) => (
+              <motion.div key={label} whileHover={{ y: -4, boxShadow: "0 0 20px rgba(124,58,237,0.3)" }}
+                className="glass-card"
+                style={{ borderRadius: 14, padding: "20px 16px", textAlign: "center", transition: "all 0.3s ease" }}>
+                <div style={{ fontSize: 26, marginBottom: 8 }}>{icon}</div>
+                <p className="glow-text" style={{ fontSize: 28, fontWeight: 800, lineHeight: 1 }}>{value}</p>
+                <p style={{ fontSize: 12, color: "var(--text-secondary)", marginTop: 6 }}>{label}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Top Languages */}
+          {topLangs.length > 0 && (
+            <div className="glass-card" style={{ borderRadius: 16, padding: 24 }}>
+              <p style={{ fontSize: 14, fontWeight: 700, color: "var(--purple-light)", marginBottom: 16, letterSpacing: 0.5 }}>🧑‍💻 Top Languages</p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {topLangs.map(([lang, count]) => {
+                  const pct = Math.round((count / repos.length) * 100);
+                  const barColor = langColors[lang] || "#a78bfa";
+                  return (
+                    <div key={lang}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: 6 }}>
+                          <span style={{ width: 10, height: 10, borderRadius: "50%", background: barColor, display: "inline-block" }} />
+                          {lang}
+                        </span>
+                        <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{pct}%</span>
+                      </div>
+                      <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, overflow: "hidden" }}>
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${pct}%` }}
+                          transition={{ duration: 0.8, ease: "easeOut" }}
+                          viewport={{ once: true }}
+                          style={{ height: "100%", background: barColor, borderRadius: 3 }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Contribution graph */}
+          <div className="glass-card" style={{ borderRadius: 16, padding: 24, textAlign: "center", overflow: "hidden" }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: "var(--purple-light)", marginBottom: 16, letterSpacing: 0.5 }}>📅 Contribution Graph</p>
+            <img
+              src="https://ghchart.rshah.org/7c3aed/Shadman-Shakib-Fuad"
+              alt="GitHub Contribution Graph"
+              style={{ width: "100%", maxWidth: 860, borderRadius: 8 }}
+            />
+            <div style={{ marginTop: 16 }}>
+              <a href="https://github.com/Shadman-Shakib-Fuad" target="_blank" rel="noopener noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--purple-light)", textDecoration: "none", fontSize: 14, fontWeight: 600 }}>
+                <FaGithub size={16} /> View GitHub Profile
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ════════════════════════════════════════════════════════════════
 export default function Home() {
   const [loading, setLoading]             = useState(true);
@@ -533,47 +648,9 @@ export default function Home() {
         </section>
 
         {/* ╔══════════════════════════════╗
-            ║  GITHUB CONTRIBUTION GRAPH   ║
+            ║  GITHUB ACTIVITY             ║
             ╚══════════════════════════════╝ */}
-        <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-            <SectionTitle title="GitHub Activity" sub="My open source contributions" />
-            <motion.div
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }} viewport={{ once: true }}
-              className="glass-card"
-              style={{ borderRadius: 20, padding: 28, marginTop: 40, textAlign: "center", overflow: "hidden" }}
-            >
-              <img
-                src="https://ghchart.rshah.org/7c3aed/Shadman-Shakib-Fuad"
-                alt="GitHub Contribution Graph"
-                style={{ width: "100%", maxWidth: 900, borderRadius: 8, filter: "brightness(1.1)" }}
-              />
-              {/* GitHub Stats Cards */}
-              <div style={{ marginTop: 24, display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-                <img
-                  src="https://github-readme-stats.vercel.app/api?username=Shadman-Shakib-Fuad&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d0d1a&title_color=a78bfa&icon_color=60a5fa&text_color=94a3b8&count_private=true"
-                  alt="GitHub Stats"
-                  style={{ borderRadius: 12, maxWidth: 400, width: "100%" }}
-                />
-                <img
-                  src="https://github-readme-stats.vercel.app/api/top-langs/?username=Shadman-Shakib-Fuad&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d0d1a&title_color=a78bfa&text_color=94a3b8"
-                  alt="Top Languages"
-                  style={{ borderRadius: 12, maxWidth: 320, width: "100%" }}
-                />
-              </div>
-              <div style={{ marginTop: 16, display: "flex", justifyContent: "center" }}>
-                <a
-                  href="https://github.com/Shadman-Shakib-Fuad"
-                  target="_blank" rel="noopener noreferrer"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--purple-light)", textDecoration: "none", fontSize: 14, fontWeight: 600 }}
-                >
-                  <FaGithub size={16} /> View GitHub Profile
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <GitHubStats />
 
         {/* CONTACT */}
         <section id="contact" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
