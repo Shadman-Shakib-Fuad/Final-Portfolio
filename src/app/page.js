@@ -76,17 +76,17 @@ const CERTS = [
 
 // ── Education & Experience Timeline ──────────────────────────
 const TIMELINE = [
-  { year: "2014", title: "PSC",   subtitle: "Primary School Certificate",          desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00", Icon: FaSchool,     color: "#a78bfa" },
-  { year: "2017", title: "JSC",   subtitle: "Junior School Certificate",            desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00", Icon: FaSchool,     color: "#60a5fa" },
-  { year: "2020", title: "SSC",   subtitle: "Secondary School Certificate",         desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00", Icon: FaGraduationCap, color: "#34d399" },
-  { year: "2022", title: "HSC",   subtitle: "Higher Secondary Certificate",         desc: "Cantonment Public School & College, Rangpur",             result: "GPA 5.00", Icon: FaGraduationCap, color: "#f59e0b" },
-  { year: "2024", title: "B.Sc",  subtitle: "Computer Science & Engineering",       desc: "SouthEast University, Dhaka — Currently Running",         result: "Running ⚡", Icon: FaUniversity, color: "#f472b6" },
+  { year: "2024", title: "B.Sc",  subtitle: "Computer Science & Engineering",       desc: "SouthEast University, Dhaka — Currently Running",         result: "Running ⚡", Icon: FaUniversity,    color: "#f472b6" },
+  { year: "2022", title: "HSC",   subtitle: "Higher Secondary Certificate",         desc: "Cantonment Public School & College, Rangpur",             result: "GPA 5.00",  Icon: FaGraduationCap, color: "#f59e0b" },
+  { year: "2020", title: "SSC",   subtitle: "Secondary School Certificate",         desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00",  Icon: FaGraduationCap, color: "#34d399" },
+  { year: "2017", title: "JSC",   subtitle: "Junior School Certificate",            desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00",  Icon: FaSchool,        color: "#60a5fa" },
+  { year: "2014", title: "PSC",   subtitle: "Primary School Certificate",           desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00",  Icon: FaSchool,        color: "#a78bfa" },
 ];
 
 const BIO = [
   { label: "Full Name",        value: "Md. Shadman Shakib Fuad" },
-  { label: "Current Location", value: "Mohakhali, Dhaka, Bangladesh" },
-  { label: "Hometown",         value: "C.O. Bazar, Rangpur, Bangladesh" },
+  { label: "Current Location", value: "Dhaka, Bangladesh" },
+  { label: "Hometown",         value: "Rangpur, Bangladesh" },
   { label: "University",       value: "SouthEast University – Department of CSE" },
   { label: "Date of Birth",    value: "09 May 2004" },
   { label: "School",           value: "Bir Uttam Shaheed Samad School & College, Rangpur" },
@@ -488,8 +488,13 @@ export default function Home() {
                     }}
                   >
                     {/* Card */}
-                    <div
+                    <motion.div
                       className="glass-card"
+                      whileHover={{
+                        scale: 1.04,
+                        boxShadow: `0 0 24px ${color}55`,
+                        transition: { duration: 0.2 },
+                      }}
                       style={{
                         width: "44%",
                         borderRadius: 16,
@@ -497,6 +502,8 @@ export default function Home() {
                         position: "relative",
                         borderLeft: isLeft ? `3px solid ${color}` : "none",
                         borderRight: !isLeft ? `3px solid ${color}` : "none",
+                        cursor: "default",
+                        transition: "box-shadow 0.3s ease",
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
@@ -507,7 +514,7 @@ export default function Home() {
                       <p style={{ fontSize: 12, color: "var(--purple-light)", fontWeight: 600, marginBottom: 6 }}>{subtitle}</p>
                       <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 8 }}>{desc}</p>
                       <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", background: color, borderRadius: 20, padding: "3px 10px" }}>{result}</span>
-                    </div>
+                    </motion.div>
 
                     {/* Center dot */}
                     <div style={{
@@ -542,7 +549,20 @@ export default function Home() {
                 alt="GitHub Contribution Graph"
                 style={{ width: "100%", maxWidth: 900, borderRadius: 8, filter: "brightness(1.1)" }}
               />
-              <div style={{ marginTop: 16, display: "flex", justifyContent: "center", gap: 20, flexWrap: "wrap" }}>
+              {/* GitHub Stats Cards */}
+              <div style={{ marginTop: 24, display: "flex", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+                <img
+                  src="https://github-readme-stats.vercel.app/api?username=Shadman-Shakib-Fuad&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d0d1a&title_color=a78bfa&icon_color=60a5fa&text_color=94a3b8&count_private=true"
+                  alt="GitHub Stats"
+                  style={{ borderRadius: 12, maxWidth: 400, width: "100%" }}
+                />
+                <img
+                  src="https://github-readme-stats.vercel.app/api/top-langs/?username=Shadman-Shakib-Fuad&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d0d1a&title_color=a78bfa&text_color=94a3b8"
+                  alt="Top Languages"
+                  style={{ borderRadius: 12, maxWidth: 320, width: "100%" }}
+                />
+              </div>
+              <div style={{ marginTop: 16, display: "flex", justifyContent: "center" }}>
                 <a
                   href="https://github.com/Shadman-Shakib-Fuad"
                   target="_blank" rel="noopener noreferrer"
