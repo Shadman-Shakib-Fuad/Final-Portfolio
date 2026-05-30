@@ -342,6 +342,13 @@ export default function Home() {
   const [loading, setLoading]             = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showTop, setShowTop]               = useState(false);
+  const [cvPreview, setCvPreview]           = useState(false);
+  const [toast, setToast]                   = useState(null);
+
+  const showToast = (msg, type = "success") => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  };
   const [activeSection, setActiveSection] = useState("Home");
   const [menuOpen, setMenuOpen]           = useState(false);
   const [formData, setFormData]           = useState({ name: "", email: "", message: "" });
@@ -402,9 +409,11 @@ export default function Home() {
       if (!res.ok) throw new Error(data.error || "Failed");
       setFormSent(true);
       setFormData({ name: "", email: "", message: "" });
+      showToast("✅ Message sent! I'll get back to you soon.");
       setTimeout(() => setFormSent(false), 4000);
     } catch (err) {
       setSendError(true);
+      showToast("❌ Failed to send. Please try again.", "error");
       setTimeout(() => setSendError(false), 4000);
     } finally { setSending(false); }
   };
@@ -554,6 +563,68 @@ export default function Home() {
                 <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8 }}>{label}</p>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+        {/* ── CTA Banner ── */}
+        <section style={{ position: "relative", zIndex: 1, padding: "0 24px 80px" }}>
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }} viewport={{ once: true }}
+              style={{
+                borderRadius: 24,
+                padding: "48px 40px",
+                textAlign: "center",
+                background: "linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(37,99,235,0.15) 100%)",
+                border: "1px solid rgba(124,58,237,0.25)",
+                backdropFilter: "blur(12px)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              {/* Glow bg */}
+              <div style={{ position: "absolute", top: "-60px", left: "50%", transform: "translateX(-50%)", width: 300, height: 300, background: "radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%)", filter: "blur(40px)", pointerEvents: "none" }} />
+              <motion.p
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }} viewport={{ once: true }}
+                style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#60a5fa", marginBottom: 12 }}
+              >
+                Open to Opportunities
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }} viewport={{ once: true }}
+                style={{ fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, color: "#f1f5f9", marginBottom: 12, lineHeight: 1.3 }}
+              >
+                Got a project in mind?
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }} viewport={{ once: true }}
+                style={{ fontSize: 15, color: "#94a3b8", marginBottom: 32, maxWidth: 500, margin: "0 auto 32px" }}
+              >
+                Let&apos;s build something amazing together! I&apos;m available for freelance projects, collaborations, and full-time opportunities.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 }} viewport={{ once: true }}
+                style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
+              >
+                <button
+                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                  className="glow-btn"
+                  style={{ padding: "14px 32px", borderRadius: 50, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, boxShadow: "0 0 24px rgba(124,58,237,0.4)" }}
+                >
+                  🚀 Hire Me
+                </button>
+                <a href="/cv/shadman-cv.pdf" download
+                  style={{ padding: "14px 32px", borderRadius: 50, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "var(--purple-light)", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}
+                >
+                  <FaDownload size={14} /> Download CV
+                </a>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
@@ -738,6 +809,67 @@ export default function Home() {
           </motion.div>
           <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
         </footer>
+
+      {/* ── CV Preview Modal ── */}
+        <AnimatePresence>
+          {cvPreview && (
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setCvPreview(false)}
+              style={{ position: "fixed", inset: 0, zIndex: 9998, background: "rgba(0,0,0,0.85)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, backdropFilter: "blur(6px)" }}
+            >
+              <motion.div
+                initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.85, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                onClick={(e) => e.stopPropagation()}
+                style={{ background: "#0d0d1a", borderRadius: 20, overflow: "hidden", width: "100%", maxWidth: 800, maxHeight: "90vh", display: "flex", flexDirection: "column", border: "1px solid rgba(124,58,237,0.3)", boxShadow: "0 0 60px rgba(124,58,237,0.3)" }}
+              >
+                {/* Modal header */}
+                <div style={{ padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+                  <span style={{ fontWeight: 700, color: "var(--purple-light)", fontSize: 15 }}>📄 CV Preview</span>
+                  <div style={{ display: "flex", gap: 10 }}>
+                    <a href="/cv/shadman-cv.pdf" download
+                      style={{ padding: "7px 16px", borderRadius: 8, background: "linear-gradient(135deg, #7c3aed, #2563eb)", color: "#fff", fontWeight: 600, fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
+                      <FaDownload size={12} /> Download
+                    </a>
+                    <button onClick={() => setCvPreview(false)}
+                      style={{ background: "rgba(255,255,255,0.06)", border: "none", color: "#94a3b8", cursor: "pointer", borderRadius: 8, padding: "7px 12px", fontSize: 18, lineHeight: 1 }}>
+                      ✕
+                    </button>
+                  </div>
+                </div>
+                {/* PDF embed */}
+                <iframe src="/cv/shadman-cv.pdf" style={{ flex: 1, border: "none", minHeight: 500 }} title="CV Preview" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ── Toast Notification ── */}
+        <AnimatePresence>
+          {toast && (
+            <motion.div
+              initial={{ opacity: 0, y: 60, x: "-50%" }}
+              animate={{ opacity: 1, y: 0, x: "-50%" }}
+              exit={{ opacity: 0, y: 60, x: "-50%" }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              style={{
+                position: "fixed", bottom: 90, left: "50%",
+                zIndex: 9999,
+                background: toast.type === "error" ? "rgba(239,68,68,0.15)" : "rgba(34,197,94,0.15)",
+                border: `1px solid ${toast.type === "error" ? "rgba(239,68,68,0.4)" : "rgba(34,197,94,0.4)"}`,
+                borderRadius: 50, padding: "12px 24px",
+                fontSize: 14, fontWeight: 600,
+                color: toast.type === "error" ? "#fca5a5" : "#86efac",
+                backdropFilter: "blur(12px)",
+                boxShadow: toast.type === "error" ? "0 0 20px rgba(239,68,68,0.2)" : "0 0 20px rgba(34,197,94,0.2)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {toast.msg}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       {/* ── Back to Top Button ── */}
         <AnimatePresence>
