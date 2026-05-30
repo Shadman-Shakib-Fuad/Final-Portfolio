@@ -83,6 +83,31 @@ const TIMELINE = [
   { year: "2014", title: "PSC",   subtitle: "Primary School Certificate",           desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00",  Icon: FaSchool,        color: "#a78bfa" },
 ];
 
+// ── Testimonials ─────────────────────────────────────────────
+const TESTIMONIALS = [
+  {
+    name: "Ariful Islam",
+    role: "Web Developer",
+    text: "Shadman is a highly dedicated developer. His attention to detail and passion for clean UI is remarkable. Loved collaborating with him!",
+    avatar: "AI",
+    color: "#a78bfa",
+  },
+  {
+    name: "Tanvir Ahmed",
+    role: "UI/UX Designer",
+    text: "Working with Shadman was a great experience. He understands design requirements quickly and implements them perfectly with code.",
+    avatar: "TA",
+    color: "#60a5fa",
+  },
+  {
+    name: "Rafiul Hasan",
+    role: "CSE Student, SEU",
+    text: "One of the most hardworking developers I know. Shadman always delivers quality work on time and goes the extra mile.",
+    avatar: "RH",
+    color: "#34d399",
+  },
+];
+
 const BIO = [
   { label: "Full Name",        value: "Md. Shadman Shakib Fuad" },
   { label: "Current Location", value: "Mohakhali, Dhaka, Bangladesh" },
@@ -618,11 +643,13 @@ export default function Home() {
                 >
                   🚀 Hire Me
                 </button>
-                <a href="/cv/shadman-cv.pdf" download
-                  style={{ padding: "14px 32px", borderRadius: 50, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "var(--purple-light)", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}
+                <motion.a href="/cv/shadman-cv.pdf" download
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(124,58,237,0.4)" }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{ padding: "14px 32px", borderRadius: 50, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "var(--purple-light)", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "border-color 0.3s ease" }}
                 >
                   <FaDownload size={14} /> Download CV
-                </a>
+                </motion.a>
               </motion.div>
             </motion.div>
           </div>
@@ -739,6 +766,82 @@ export default function Home() {
             ║  GITHUB ACTIVITY             ║
             ╚══════════════════════════════╝ */}
         <GitHubStats />
+
+        {/* ╔══════════════════════════════╗
+            ║    OPEN SOURCE               ║
+            ╚══════════════════════════════╝ */}
+        <section style={{ position: "relative", zIndex: 1, padding: "0 24px 80px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <SectionTitle title="Open Source" sub="My contributions to the community" />
+            <motion.div
+              variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
+              style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, marginTop: 40 }}
+            >
+              {[
+                { title: "Portfolio Website",    desc: "My personal portfolio built with Next.js, Tailwind CSS & Framer Motion. Open source for the community.",          stars: "⭐", lang: "JavaScript", color: "#f7df1e", url: "https://github.com/Shadman-Shakib-Fuad" },
+                { title: "DocAppoint",           desc: "A doctor appointment booking platform built with React & Firebase. Clean UI with real-time functionality.",       stars: "⭐", lang: "React",      color: "#61dafb", url: "https://github.com/Shadman-Shakib-Fuad" },
+                { title: "Mango Bookstore",      desc: "Modern online bookstore web app built with Next.js and Tailwind CSS. Features smooth animations.",                stars: "⭐", lang: "Next.js",    color: "#fff",    url: "https://github.com/Shadman-Shakib-Fuad" },
+              ].map(({ title, desc, stars, lang, color, url }) => (
+                <motion.div key={title} variants={fadeUp}
+                  whileHover={{ y: -5, boxShadow: "0 0 20px rgba(124,58,237,0.25)" }}
+                  className="glass-card"
+                  style={{ borderRadius: 16, padding: 22, display: "flex", flexDirection: "column", gap: 12, transition: "all 0.3s ease" }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 700, color: "var(--text-primary)" }}>{title}</h3>
+                    <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}>
+                      <FaGithub size={18} />
+                    </a>
+                  </div>
+                  <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65, flex: 1 }}>{desc}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "#94a3b8" }}>
+                      <span style={{ width: 10, height: 10, borderRadius: "50%", background: color, display: "inline-block" }} />
+                      {lang}
+                    </span>
+                    <span style={{ fontSize: 12, color: "#94a3b8" }}>{stars} Star</span>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ╔══════════════════════════════╗
+            ║      TESTIMONIALS            ║
+            ╚══════════════════════════════╝ */}
+        <section style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <SectionTitle title="What People Say" sub="Feedback from peers & collaborators" />
+            <motion.div
+              variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
+              style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24, marginTop: 40 }}
+            >
+              {TESTIMONIALS.map(({ name, role, text, avatar, color }) => (
+                <motion.div
+                  key={name} variants={fadeUp}
+                  whileHover={{ y: -5, boxShadow: `0 0 24px ${color}33` }}
+                  className="glass-card"
+                  style={{ borderRadius: 18, padding: 28, display: "flex", flexDirection: "column", gap: 16, transition: "all 0.3s ease", borderTop: `3px solid ${color}` }}
+                >
+                  {/* Quote */}
+                  <p style={{ fontSize: 32, color, lineHeight: 1, marginBottom: -8 }}>"</p>
+                  <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.75, fontStyle: "italic" }}>{text}</p>
+                  {/* Author */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
+                    <div style={{ width: 42, height: 42, borderRadius: "50%", background: `${color}22`, border: `2px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color, flexShrink: 0 }}>
+                      {avatar}
+                    </div>
+                    <div>
+                      <p style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>{name}</p>
+                      <p style={{ fontSize: 12, color: "var(--text-secondary)" }}>{role}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
 
         {/* CONTACT */}
         <section id="contact" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
