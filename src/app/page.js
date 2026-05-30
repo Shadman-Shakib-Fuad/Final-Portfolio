@@ -16,6 +16,7 @@ import {
   SiMongodb, SiExpress, SiC,
 } from "react-icons/si";
 import ownPic from "../picture/own-pic.png";
+import { AnimatedStats, ServicesSection, SkillsProgress, FAQSection, WhatsAppButton, CurrentlyLearning, WaveDivider } from "../components/ExtraSections";
 
 const NAV_LINKS = ["Home", "Skills", "Projects", "Certificates", "Contact", "About"];
 
@@ -574,22 +575,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* STATS */}
-        <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
-            {[
-              { num: "5+",   label: "Projects Completed",             icon: "🚀" },
-              { num: "6+",   label: "Months Learning Web Development", icon: "📚" },
-              { num: "100%", label: "Passion For Coding",              icon: "💜" },
-            ].map(({ num, label, icon }) => (
-              <motion.div key={label} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="glass-card stat-card" style={{ borderRadius: 16, padding: "28px 24px", textAlign: "center" }}>
-                <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
-                <p className="glow-text" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1 }}>{num}</p>
-                <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8 }}>{label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+        <SkillsProgress />
+        <AnimatedStats />
+        <CurrentlyLearning />
 
         {/* ── CTA Banner ── */}
         <section style={{ position: "relative", zIndex: 1, padding: "0 24px 80px" }}>
@@ -654,6 +642,10 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+
+        <WaveDivider />
+        <ServicesSection />
+        <WaveDivider flip={true} />
 
         {/* PROJECTS */}
         <section id="projects" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
@@ -882,6 +874,9 @@ export default function Home() {
           </div>
         </section>
 
+        <FAQSection />
+        <WaveDivider />
+
         {/* FOOTER */}
         <footer style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 -1px 30px rgba(124,58,237,0.08)", padding: "40px 24px 30px", textAlign: "center" }}>
           <p className="glow-text" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>Md. Shadman Shakib Fuad</p>
@@ -973,6 +968,8 @@ export default function Home() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <WhatsAppButton />
 
       {/* ── Back to Top Button ── */}
         <AnimatePresence>
