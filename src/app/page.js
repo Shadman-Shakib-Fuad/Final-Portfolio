@@ -111,7 +111,7 @@ const CERTS = [
 
 const BIO = [
   { label: "Full Name",        value: "Md. Shadman Shakib Fuad" },
-  { label: "Current Location", value: "Dhaka, Bangladesh" },
+  { label: "Current Location", value: "Mohakhali, Dhaka, Bangladesh" },
   { label: "Hometown",         value: "Rangpur, Bangladesh" },
   { label: "University",       value: "SouthEast University – Department of CSE" },
   { label: "Date of Birth",    value: "09 May 2004" },
