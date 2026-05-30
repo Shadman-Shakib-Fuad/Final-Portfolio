@@ -9,6 +9,7 @@ import {
   FaExternalLinkAlt, FaDownload, FaBars, FaTimes,
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs,
   FaGitAlt, FaPython, FaJava, FaFigma, FaDatabase,
+  FaGraduationCap, FaSchool, FaUniversity,
 } from "react-icons/fa";
 import {
   SiNextdotjs, SiTailwindcss, SiFirebase,
@@ -61,57 +62,30 @@ const SKILLS = [
   { name: "Python",       Icon: FaPython,      color: "#3776ab" },
 ];
 
-// ── Projects with preview screenshots ──
 const PROJECTS = [
-  {
-    title: "DocAppoint",
-    url: "https://doc-appoint-olive.vercel.app/",
-    desc: "Modern Doctor Appointment Booking Platform.",
-    tag: "Healthcare · React · Firebase",
-    preview: "/projects/docappoint.PNG",
-  },
-  {
-    title: "Mango",
-    url: "https://mango-sage.vercel.app/",
-    desc: "Modern online bookstore web application.",
-    tag: "E-Commerce · Next.js · Tailwind",
-    preview: "/projects/mango.PNG",
-  },
-  {
-    title: "React Website",
-    url: "https://cozy-pika-83908a.netlify.app/",
-    desc: "Creative React based animated UI website.",
-    tag: "UI · React · Framer Motion",
-    preview: "/projects/react-website.PNG",
-  },
-  {
-    title: "Creative Agency",
-    url: "https://prismatic-pie-cf7807.netlify.app/",
-    desc: "Animated digital agency landing page.",
-    tag: "Agency · Animation · CSS",
-    preview: "/projects/creative-agency.PNG",
-  },
+  { title: "DocAppoint",      url: "https://doc-appoint-olive.vercel.app/",     desc: "Modern Doctor Appointment Booking Platform.",  tag: "Healthcare · React · Firebase",  preview: "/projects/docappoint.PNG"      },
+  { title: "Mango",           url: "https://mango-sage.vercel.app/",            desc: "Modern online bookstore web application.",      tag: "E-Commerce · Next.js · Tailwind", preview: "/projects/mango.PNG"           },
+  { title: "React Website",   url: "https://cozy-pika-83908a.netlify.app/",     desc: "Creative React based animated UI website.",     tag: "UI · React · Framer Motion",     preview: "/projects/react-website.PNG"   },
+  { title: "Creative Agency", url: "https://prismatic-pie-cf7807.netlify.app/", desc: "Animated digital agency landing page.",         tag: "Agency · Animation · CSS",       preview: "/projects/creative-agency.PNG" },
 ];
 
 const CERTS = [
-  {
-    img: "/certificate/certificate1.png",
-    title: "AI CodeLab Program 2026",
-    desc: "Awarded for gaining foundational knowledge of modern AI concepts, Agentic AI, and real-world AI solution design — organized by IEEE CS SEU SBC & Dept. of CSE, Southeast University in collaboration with Learn With Sumit.",
-    badge: "Certificate of Appreciation",
-  },
-  {
-    img: "/certificate/certificate2.png",
-    title: "Introduction to CIP – OPSWAT Academy",
-    desc: "Successfully graduated from the Introduction to CIP (Critical Infrastructure Protection) program by OPSWAT Academy. Issued May 15, 2026 · Valid until May 15, 2027 · ID: OPA8kq55gg",
-    badge: "Verified Certificate",
-    verify: "https://learn.opswatacademy.com/certificate/OPA8kq55gg",
-  },
+  { img: "/certificate/certificate1.png", title: "AI CodeLab Program 2026",           desc: "Awarded for gaining foundational knowledge of modern AI concepts, Agentic AI, and real-world AI solution design — organized by IEEE CS SEU SBC & Dept. of CSE, Southeast University in collaboration with Learn With Sumit.", badge: "Certificate of Appreciation" },
+  { img: "/certificate/certificate2.png", title: "Introduction to CIP – OPSWAT Academy", desc: "Successfully graduated from the Introduction to CIP (Critical Infrastructure Protection) program by OPSWAT Academy. Issued May 15, 2026 · Valid until May 15, 2027 · ID: OPA8kq55gg", badge: "Verified Certificate", verify: "https://learn.opswatacademy.com/certificate/OPA8kq55gg" },
+];
+
+// ── Education & Experience Timeline ──────────────────────────
+const TIMELINE = [
+  { year: "2014", title: "PSC",   subtitle: "Primary School Certificate",          desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00", Icon: FaSchool,     color: "#a78bfa" },
+  { year: "2017", title: "JSC",   subtitle: "Junior School Certificate",            desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00", Icon: FaSchool,     color: "#60a5fa" },
+  { year: "2020", title: "SSC",   subtitle: "Secondary School Certificate",         desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00", Icon: FaGraduationCap, color: "#34d399" },
+  { year: "2022", title: "HSC",   subtitle: "Higher Secondary Certificate",         desc: "Cantonment Public School & College, Rangpur",             result: "GPA 5.00", Icon: FaGraduationCap, color: "#f59e0b" },
+  { year: "2024", title: "B.Sc",  subtitle: "Computer Science & Engineering",       desc: "SouthEast University, Dhaka — Currently Running",         result: "Running ⚡", Icon: FaUniversity, color: "#f472b6" },
 ];
 
 const BIO = [
   { label: "Full Name",        value: "Md. Shadman Shakib Fuad" },
-  { label: "Current Location", value: "Mohakhali, Dhaka, Bangladesh" },
+  { label: "Current Location", value: "Dhaka, Bangladesh" },
   { label: "Hometown",         value: "Rangpur, Bangladesh" },
   { label: "University",       value: "SouthEast University – Department of CSE" },
   { label: "Date of Birth",    value: "09 May 2004" },
@@ -130,6 +104,70 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 
+// ── Page Loading Screen ───────────────────────────────────────
+function LoadingScreen({ onDone }) {
+  useEffect(() => {
+    const t = setTimeout(onDone, 2200);
+    return () => clearTimeout(t);
+  }, [onDone]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{
+        position: "fixed", inset: 0, zIndex: 9999,
+        background: "#09090f",
+        display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center", gap: 24,
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        style={{ textAlign: "center" }}
+      >
+        <motion.h1
+          style={{
+            fontSize: "clamp(40px, 8vw, 72px)",
+            fontWeight: 900,
+            background: "linear-gradient(135deg, #a78bfa, #60a5fa)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            letterSpacing: 2,
+          }}
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          S. Fuad
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          style={{ fontSize: 14, color: "#94a3b8", marginTop: 8, letterSpacing: 3, textTransform: "uppercase" }}
+        >
+          Frontend Developer
+        </motion.p>
+      </motion.div>
+
+      {/* Loading bar */}
+      <div style={{ width: 200, height: 3, background: "rgba(255,255,255,0.08)", borderRadius: 4, overflow: "hidden" }}>
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 1.8, ease: "easeInOut" }}
+          style={{ height: "100%", background: "linear-gradient(90deg, #7c3aed, #2563eb)", borderRadius: 4 }}
+        />
+      </div>
+    </motion.div>
+  );
+}
+
+// ── TechIcon ──────────────────────────────────────────────────
 function TechIcon({ Icon, top, left, size, index }) {
   const duration = 6 + (index % 7) * 1.2;
   const delay    = (index * 0.85) % 6;
@@ -144,88 +182,39 @@ function TechIcon({ Icon, top, left, size, index }) {
   ];
   const { x, y } = patterns[index % patterns.length];
   return (
-    <motion.div
-      style={{ position: "absolute", top, left, opacity: 0.1 }}
-      animate={{ x, y }}
-      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
-    >
+    <motion.div style={{ position: "absolute", top, left, opacity: 0.1 }} animate={{ x, y }} transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}>
       <Icon size={size} style={{ color: "rgba(167,139,250,1)" }} />
     </motion.div>
   );
 }
 
-// ── Project card with hover preview ──────────────────────────
+// ── Project Card ──────────────────────────────────────────────
 function ProjectCard({ title, url, desc, tag, preview }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <motion.div
-      variants={fadeUp}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        borderRadius: 16, overflow: "hidden",
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        backdropFilter: "blur(12px)",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        transform: hovered ? "translateY(-6px)" : "translateY(0)",
-        boxShadow: hovered ? "0 0 30px rgba(124,58,237,0.3)" : "none",
-      }}
-    >
-      {/* Screenshot */}
+    <motion.div variants={fadeUp} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+      style={{ borderRadius: 16, overflow: "hidden", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", transition: "transform 0.3s ease, box-shadow 0.3s ease", transform: hovered ? "translateY(-6px)" : "translateY(0)", boxShadow: hovered ? "0 0 30px rgba(124,58,237,0.3)" : "none" }}>
       <div style={{ position: "relative", height: 180, overflow: "hidden", background: "#0d0d1a" }}>
-        <img
-          src={preview}
-          alt={title}
-          style={{
-            width: "100%", height: "100%",
-            objectFit: "cover", objectPosition: "top",
-            transition: "transform 0.5s ease",
-            transform: hovered ? "scale(1.06)" : "scale(1)",
-          }}
-        />
-        {/* Hover overlay */}
+        <img src={preview} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
         <AnimatePresence>
           {hovered && (
-            <motion.div
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              style={{
-                position: "absolute", inset: 0,
-                background: "rgba(124,58,237,0.75)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-            >
-              <a
-                href={url} target="_blank" rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  display: "flex", alignItems: "center", gap: 8,
-                  background: "#fff", color: "#7c3aed",
-                  padding: "10px 22px", borderRadius: 50,
-                  fontWeight: 700, fontSize: 14, textDecoration: "none",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-                }}
-              >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+              style={{ position: "absolute", inset: 0, background: "rgba(124,58,237,0.75)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <a href={url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}
+                style={{ display: "flex", alignItems: "center", gap: 8, background: "#fff", color: "#7c3aed", padding: "10px 22px", borderRadius: 50, fontWeight: 700, fontSize: 14, textDecoration: "none", boxShadow: "0 4px 20px rgba(0,0,0,0.2)" }}>
                 <FaExternalLinkAlt size={13} /> Live Preview
               </a>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-
-      {/* Card body */}
       <div style={{ padding: "18px 20px", display: "flex", flexDirection: "column", gap: 10 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <h3 style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)" }}>{title}</h3>
-          <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}>
-            <FaExternalLinkAlt size={14} />
-          </a>
+          <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}><FaExternalLinkAlt size={14} /></a>
         </div>
         <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65 }}>{desc}</p>
-        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "4px 10px", alignSelf: "flex-start", letterSpacing: 0.5 }}>
-          {tag}
-        </span>
+        <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "4px 10px", alignSelf: "flex-start", letterSpacing: 0.5 }}>{tag}</span>
       </div>
     </motion.div>
   );
@@ -233,6 +222,7 @@ function ProjectCard({ title, url, desc, tag, preview }) {
 
 // ════════════════════════════════════════════════════════════════
 export default function Home() {
+  const [loading, setLoading]             = useState(true);
   const [activeSection, setActiveSection] = useState("Home");
   const [menuOpen, setMenuOpen]           = useState(false);
   const [formData, setFormData]           = useState({ name: "", email: "", message: "" });
@@ -247,16 +237,10 @@ export default function Home() {
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZla3lqeGphdmNkaGpoZmVud3R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NDk1ODksImV4cCI6MjA5NTQyNTU4OX0.qGLcBAcclezmimxQUmo6_r3qHpAe_pTaVnacCe7dLJ8";
     async function trackVisit() {
       try {
-        const getRes = await fetch(`${SUPABASE_URL}/rest/v1/visitors?select=count&id=eq.1`, {
-          headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` },
-        });
+        const getRes = await fetch(`${SUPABASE_URL}/rest/v1/visitors?select=count&id=eq.1`, { headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` } });
         const getData = await getRes.json();
         const newCount = (getData?.[0]?.count ?? 0) + 1;
-        await fetch(`${SUPABASE_URL}/rest/v1/visitors?id=eq.1`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json", "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Prefer": "return=minimal" },
-          body: JSON.stringify({ count: newCount }),
-        });
+        await fetch(`${SUPABASE_URL}/rest/v1/visitors?id=eq.1`, { method: "PATCH", headers: { "Content-Type": "application/json", "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Prefer": "return=minimal" }, body: JSON.stringify({ count: newCount }) });
         setVisitors(newCount);
       } catch (e) { setVisitors("—"); }
     }
@@ -268,305 +252,381 @@ export default function Home() {
     NAV_LINKS.forEach((link) => {
       const el = document.getElementById(link.toLowerCase());
       if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(link); },
-        { threshold: 0.35 }
-      );
+      const obs = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setActiveSection(link); }, { threshold: 0.35 });
       obs.observe(el);
       observers.push(obs);
     });
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
-  const scrollTo = (id) => {
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
+  const scrollTo = (id) => { document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
 
   const handleForm = async (e) => {
     e.preventDefault();
     setSending(true);
     setSendError(false);
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(formData) });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed");
       setFormSent(true);
       setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setFormSent(false), 4000);
     } catch (err) {
-      console.error("Send error:", err);
       setSendError(true);
       setTimeout(() => setSendError(false), 4000);
-    } finally {
-      setSending(false);
-    }
+    } finally { setSending(false); }
   };
 
   return (
-    <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
+    <>
+      {/* ── Loading Screen ── */}
+      <AnimatePresence>
+        {loading && <LoadingScreen onDone={() => setLoading(false)} />}
+      </AnimatePresence>
 
-      <style>{`
-        @keyframes pulse-dot {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50%       { opacity: 0.4; transform: scale(1.4); }
-        }
-      `}</style>
+      <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
+        <style>{`
+          @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.4; transform: scale(1.4); }
+          }
+        `}</style>
 
-      {/* ── Background blobs + tech icons ── */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-        <div className="blob-1 absolute rounded-full" style={{ width: 600, height: 600, top: "-100px", left: "-150px", background: "radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)", filter: "blur(60px)" }} />
-        <div className="blob-2 absolute rounded-full" style={{ width: 500, height: 500, bottom: "10%", right: "-100px", background: "radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%)", filter: "blur(50px)" }} />
-        <div className="blob-3 absolute rounded-full" style={{ width: 400, height: 400, top: "50%", left: "40%", background: "radial-gradient(circle, rgba(167,139,250,0.07) 0%, transparent 70%)", filter: "blur(40px)" }} />
-        {TECH_BG.map(({ Icon, top, left, size }, i) => (
-          <TechIcon key={i} Icon={Icon} top={top} left={left} size={size} index={i} />
-        ))}
-      </div>
-
-      {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-card" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span className="glow-text" style={{ fontSize: 22, fontWeight: 700, letterSpacing: 1, cursor: "pointer" }} onClick={() => scrollTo("home")}>
-            S. Fuad
-          </span>
-          <ul style={{ display: "flex", gap: 8, listStyle: "none" }} className="hidden md:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link}>
-                <button onClick={() => scrollTo(link.toLowerCase())} style={{ background: "none", border: "none", cursor: "pointer", padding: "6px 14px", borderRadius: 8, fontSize: 14, fontWeight: 500, letterSpacing: 0.3, transition: "all 0.25s ease", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", borderBottom: activeSection === link ? "2px solid var(--purple-glow)" : "2px solid transparent", textShadow: activeSection === link ? "0 0 10px rgba(167,139,250,0.5)" : "none" }}>
-                  {link}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-primary)", padding: 8 }}>
-            {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
-          </button>
+        {/* Background blobs + tech icons */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+          <div className="blob-1 absolute rounded-full" style={{ width: 600, height: 600, top: "-100px", left: "-150px", background: "radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)", filter: "blur(60px)" }} />
+          <div className="blob-2 absolute rounded-full" style={{ width: 500, height: 500, bottom: "10%", right: "-100px", background: "radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%)", filter: "blur(50px)" }} />
+          <div className="blob-3 absolute rounded-full" style={{ width: 400, height: 400, top: "50%", left: "40%", background: "radial-gradient(circle, rgba(167,139,250,0.07) 0%, transparent 70%)", filter: "blur(40px)" }} />
+          {TECH_BG.map(({ Icon, top, left, size }, i) => <TechIcon key={i} Icon={Icon} top={top} left={left} size={size} index={i} />)}
         </div>
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }} style={{ background: "rgba(9,9,15,0.97)", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "12px 0" }}>
+
+        {/* NAVBAR */}
+        <nav className="fixed top-0 left-0 right-0 z-50 glass-card" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span className="glow-text" style={{ fontSize: 22, fontWeight: 700, letterSpacing: 1, cursor: "pointer" }} onClick={() => scrollTo("home")}>S. Fuad</span>
+            <ul style={{ display: "flex", gap: 8, listStyle: "none" }} className="hidden md:flex">
               {NAV_LINKS.map((link) => (
-                <button key={link} onClick={() => scrollTo(link.toLowerCase())} style={{ display: "block", width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", padding: "12px 24px", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", fontSize: 15, fontWeight: 500 }}>
-                  {link}
-                </button>
+                <li key={link}>
+                  <button onClick={() => scrollTo(link.toLowerCase())} style={{ background: "none", border: "none", cursor: "pointer", padding: "6px 14px", borderRadius: 8, fontSize: 14, fontWeight: 500, letterSpacing: 0.3, transition: "all 0.25s ease", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", borderBottom: activeSection === link ? "2px solid var(--purple-glow)" : "2px solid transparent", textShadow: activeSection === link ? "0 0 10px rgba(167,139,250,0.5)" : "none" }}>{link}</button>
+                </li>
               ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-
-      {/* Social Sidebar */}
-      <div className="social-sidebar fixed right-5 top-1/2 z-40 flex flex-col gap-3" style={{ transform: "translateY(-50%)" }}>
-        {[
-          { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad",                         label: "GitHub"    },
-          { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/", label: "LinkedIn"  },
-          { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad",                   label: "Facebook"  },
-          { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/",                label: "Instagram" },
-        ].map(({ Icon, href, label }) => (
-          <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="social-icon glass-card" style={{ width: 42, height: 42, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
-            <Icon size={17} />
-          </a>
-        ))}
-      </div>
-
-      {/* HERO */}
-      <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "80px 24px 60px" }}>
-        <div className="hero-two-col" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40, width: "100%", flexWrap: "wrap" }}>
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: "easeOut" }} style={{ flex: "1 1 340px" }}>
-            <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: 50, padding: "6px 16px", fontSize: 13, fontWeight: 600, color: "#4ade80", letterSpacing: 0.5 }}>
-                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.4)", display: "inline-block", animation: "pulse-dot 1.8s ease-in-out infinite" }} />
-                Available for Hire
-              </span>
-            </motion.div>
-            <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "var(--purple-light)", marginBottom: 12 }}>Welcome to my Portfolio</p>
-            <h1 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 800, lineHeight: 1.15, marginBottom: 16 }}>
-              Hi, I&apos;m <span className="glow-text">Md. Shadman</span><br />
-              <span style={{ color: "var(--text-primary)" }}>Shakib Fuad</span>
-            </h1>
-            <div style={{ fontSize: "clamp(16px, 2.5vw, 22px)", fontWeight: 600, marginBottom: 20, color: "var(--purple-light)", minHeight: 32 }}>
-              <TypeAnimation sequence={["Frontend Web Developer", 2000, "React JS Developer", 2000, "Next.js Developer", 2000, "Creative UI Designer", 2000, "CSE Student", 2000]} wrapper="span" speed={50} repeat={Infinity} />
-            </div>
-            <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--text-secondary)", marginBottom: 32, maxWidth: 480 }}>
-              Passionate Frontend Developer from Bangladesh focused on building beautiful, interactive and high-performance modern web applications with exceptional UI/UX experiences.
-            </p>
-            <div className="hero-btns" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
-              <button className="glow-btn" onClick={() => scrollTo("projects")} style={{ padding: "12px 24px", borderRadius: 10, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>Explore Projects</button>
-              <button className="glow-btn" onClick={() => scrollTo("about")} style={{ padding: "12px 24px", borderRadius: 10, background: "transparent", border: "1px solid rgba(124,58,237,0.5)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>More About Me</button>
-              <a href="/cv/shadman-cv.pdf" download className="glow-btn" style={{ padding: "12px 24px", borderRadius: 10, background: "rgba(124,58,237,0.12)", border: "1px solid rgba(167,139,250,0.3)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4, display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
-                <FaDownload size={13} /> Download CV
-              </a>
-            </div>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              {[
-                { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad" },
-                { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
-                { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad" },
-                { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/" },
-              ].map(({ Icon, href }, i) => (
-                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="social-icon glass-card" style={{ width: 40, height: 40, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }} style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
-            <div className="float-anim" style={{ position: "relative", width: "clamp(240px, 30vw, 340px)" }}>
-              <div style={{ position: "absolute", inset: -4, borderRadius: 24, background: "linear-gradient(135deg, #7c3aed, #2563eb, #7c3aed)", padding: 3, zIndex: 0, filter: "blur(2px)", opacity: 0.85 }} />
-              <div style={{ position: "relative", borderRadius: 22, overflow: "hidden", zIndex: 1, boxShadow: "0 0 40px rgba(124,58,237,0.4), 0 0 80px rgba(37,99,235,0.2)" }}>
-                <Image src={ownPic} alt="Md. Shadman Shakib Fuad" style={{ width: "100%", height: "auto", display: "block" }} priority />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SKILLS */}
-      <section id="skills" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <SectionTitle title="Tech Arsenal" sub="Technologies I work with" />
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: 16, marginTop: 40 }}>
-            {SKILLS.map(({ name, Icon, color }) => (
-              <motion.div key={name} variants={fadeUp} className="glass-card skill-card" style={{ borderRadius: 14, padding: "20px 12px", textAlign: "center", cursor: "default" }}>
-                <Icon size={34} style={{ color, marginBottom: 10 }} />
-                <p style={{ fontSize: 13, fontWeight: 500, color: "var(--text-secondary)" }}>{name}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* STATS */}
-      <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
-          {[
-            { num: "5+",   label: "Projects Completed",             icon: "🚀" },
-            { num: "6+",   label: "Months Learning Web Development", icon: "📚" },
-            { num: "100%", label: "Passion For Coding",              icon: "💜" },
-          ].map(({ num, label, icon }) => (
-            <motion.div key={label} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="glass-card stat-card" style={{ borderRadius: 16, padding: "28px 24px", textAlign: "center" }}>
-              <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
-              <p className="glow-text" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1 }}>{num}</p>
-              <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8 }}>{label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* PROJECTS */}
-      <section id="projects" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <SectionTitle title="Featured Projects" sub="Things I've built" />
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24, marginTop: 40 }}>
-            {PROJECTS.map((p) => <ProjectCard key={p.title} {...p} />)}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CERTIFICATES */}
-      <section id="certificates" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <SectionTitle title="Certificates" sub="Achievements & recognitions" />
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}
-            style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "stretch", gap: 36, marginTop: 40 }}>
-            {CERTS.map(({ img, title, desc, badge, verify }) => (
-              <motion.div key={title} variants={fadeUp} className="glass-card cert-card"
-                style={{ borderRadius: 18, width: 420, maxWidth: "100%", flexShrink: 0, display: "flex", flexDirection: "column" }}>
-                <div style={{ overflow: "hidden", borderRadius: "18px 18px 0 0", height: 230, flexShrink: 0 }}>
-                  <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                <div style={{ padding: 22, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "3px 10px", letterSpacing: 0.4, alignSelf: "flex-start" }}>{badge}</span>
-                  <h3 style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.4 }}>{title}</h3>
-                  <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, flex: 1 }}>{desc}</p>
-                  {verify && (
-                    <a href={verify} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: "var(--purple-light)", display: "flex", alignItems: "center", gap: 5, textDecoration: "none", fontWeight: 600, marginTop: 4 }}>
-                      <FaExternalLinkAlt size={11} /> Verify Certificate
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
-        <div style={{ maxWidth: 600, margin: "0 auto" }}>
-          <SectionTitle title="Get In Touch" sub="I'd love to hear from you" />
-          <motion.form onSubmit={handleForm} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="glass-card" style={{ borderRadius: 20, padding: 36, marginTop: 40, display: "flex", flexDirection: "column", gap: 18 }}>
-            <div>
-              <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Name</label>
-              <input className="form-input" type="text" placeholder="Your full name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
-            </div>
-            <div>
-              <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Email</label>
-              <input className="form-input" type="email" placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
-            </div>
-            <div>
-              <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Message</label>
-              <textarea className="form-input" placeholder="Write your message..." rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required style={{ resize: "vertical" }} />
-            </div>
-            <button type="submit" disabled={sending} className="glow-btn" style={{ padding: "13px 0", borderRadius: 10, background: sending ? "rgba(124,58,237,0.5)" : "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: sending ? "not-allowed" : "pointer", letterSpacing: 0.5, transition: "all 0.3s ease", opacity: sending ? 0.7 : 1 }}>
-              {sending ? "⏳ Sending..." : formSent ? "✅ Message Sent!" : sendError ? "❌ Failed! Try Again" : "Send Message"}
+            </ul>
+            <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-primary)", padding: 8 }}>
+              {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
-          </motion.form>
-        </div>
-      </section>
-
-      {/* BIOGRAPHY */}
-      <section id="about" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <SectionTitle title="Biography" sub="A little about me" />
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="glass-card" style={{ borderRadius: 20, overflow: "hidden", marginTop: 40 }}>
-            {BIO.map(({ label, value }, i) => (
-              <motion.div key={label} variants={fadeUp} className="bio-row" style={{ display: "grid", gridTemplateColumns: "180px 1fr", padding: "16px 28px", borderBottom: i < BIO.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none", gap: 12, alignItems: "center" }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--purple-light)", letterSpacing: 0.3 }}>{label} :</span>
-                <span style={{ fontSize: 14, color: "var(--text-primary)", lineHeight: 1.6 }}>{value}</span>
+          </div>
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }} style={{ background: "rgba(9,9,15,0.97)", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "12px 0" }}>
+                {NAV_LINKS.map((link) => (
+                  <button key={link} onClick={() => scrollTo(link.toLowerCase())} style={{ display: "block", width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", padding: "12px 24px", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", fontSize: 15, fontWeight: 500 }}>{link}</button>
+                ))}
               </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+            )}
+          </AnimatePresence>
+        </nav>
 
-      {/* FOOTER */}
-      <footer style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 -1px 30px rgba(124,58,237,0.08)", padding: "40px 24px 30px", textAlign: "center" }}>
-        <p className="glow-text" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>Md. Shadman Shakib Fuad</p>
-        <p style={{ fontSize: 13, color: "var(--purple-light)", marginBottom: 8 }}>Frontend Web Developer</p>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 20 }}>Crafting modern digital experiences with code &amp; creativity.</p>
-        <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 24 }}>
+        {/* Social Sidebar */}
+        <div className="social-sidebar fixed right-5 top-1/2 z-40 flex flex-col gap-3" style={{ transform: "translateY(-50%)" }}>
           {[
-            { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad" },
-            { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
-            { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad" },
-            { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/" },
-          ].map(({ Icon, href }, i) => (
-            <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="social-icon glass-card" style={{ width: 38, height: 38, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
-              <Icon size={15} />
+            { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad",                         label: "GitHub"    },
+            { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/", label: "LinkedIn"  },
+            { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad",                   label: "Facebook"  },
+            { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/",                label: "Instagram" },
+          ].map(({ Icon, href, label }) => (
+            <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="social-icon glass-card" style={{ width: 42, height: 42, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
+              <Icon size={17} />
             </a>
           ))}
         </div>
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-          style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 50, padding: "7px 18px", marginBottom: 16, fontSize: 13, color: "var(--text-secondary)" }}>
-          <span style={{ fontSize: 16 }}>👁️</span>
-          <span>
-            {visitors !== null ? (
-              <><span style={{ fontWeight: 700, color: "var(--purple-light)" }}>{typeof visitors === "number" ? visitors.toLocaleString() : visitors}</span>{" "}total visitors</>
-            ) : (
-              <span>Loading visitors...</span>
-            )}
-          </span>
-        </motion.div>
-        <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
-      </footer>
 
-    </div>
+        {/* HERO */}
+        <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "80px 24px 60px" }}>
+          <div className="hero-two-col" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40, width: "100%", flexWrap: "wrap" }}>
+            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: "easeOut" }} style={{ flex: "1 1 340px" }}>
+              <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: 50, padding: "6px 16px", fontSize: 13, fontWeight: 600, color: "#4ade80", letterSpacing: 0.5 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.4)", display: "inline-block", animation: "pulse-dot 1.8s ease-in-out infinite" }} />
+                  Available for Hire
+                </span>
+              </motion.div>
+              <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "var(--purple-light)", marginBottom: 12 }}>Welcome to my Portfolio</p>
+              <h1 style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 800, lineHeight: 1.15, marginBottom: 16 }}>
+                Hi, I&apos;m <span className="glow-text">Md. Shadman</span><br />
+                <span style={{ color: "var(--text-primary)" }}>Shakib Fuad</span>
+              </h1>
+              <div style={{ fontSize: "clamp(16px, 2.5vw, 22px)", fontWeight: 600, marginBottom: 20, color: "var(--purple-light)", minHeight: 32 }}>
+                <TypeAnimation sequence={["Frontend Web Developer", 2000, "React JS Developer", 2000, "Next.js Developer", 2000, "Creative UI Designer", 2000, "CSE Student", 2000]} wrapper="span" speed={50} repeat={Infinity} />
+              </div>
+              <p style={{ fontSize: 15, lineHeight: 1.75, color: "var(--text-secondary)", marginBottom: 32, maxWidth: 480 }}>
+                Passionate Frontend Developer from Bangladesh focused on building beautiful, interactive and high-performance modern web applications with exceptional UI/UX experiences.
+              </p>
+              <div className="hero-btns" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
+                <button className="glow-btn" onClick={() => scrollTo("projects")} style={{ padding: "12px 24px", borderRadius: 10, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>Explore Projects</button>
+                <button className="glow-btn" onClick={() => scrollTo("about")} style={{ padding: "12px 24px", borderRadius: 10, background: "transparent", border: "1px solid rgba(124,58,237,0.5)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>More About Me</button>
+                <a href="/cv/shadman-cv.pdf" download className="glow-btn" style={{ padding: "12px 24px", borderRadius: 10, background: "rgba(124,58,237,0.12)", border: "1px solid rgba(167,139,250,0.3)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4, display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+                  <FaDownload size={13} /> Download CV
+                </a>
+              </div>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                {[
+                  { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad" },
+                  { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
+                  { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad" },
+                  { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/" },
+                ].map(({ Icon, href }, i) => (
+                  <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="social-icon glass-card" style={{ width: 40, height: 40, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
+                    <Icon size={16} />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }} style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
+              <div className="float-anim" style={{ position: "relative", width: "clamp(240px, 30vw, 340px)" }}>
+                <div style={{ position: "absolute", inset: -4, borderRadius: 24, background: "linear-gradient(135deg, #7c3aed, #2563eb, #7c3aed)", padding: 3, zIndex: 0, filter: "blur(2px)", opacity: 0.85 }} />
+                <div style={{ position: "relative", borderRadius: 22, overflow: "hidden", zIndex: 1, boxShadow: "0 0 40px rgba(124,58,237,0.4), 0 0 80px rgba(37,99,235,0.2)" }}>
+                  <Image src={ownPic} alt="Md. Shadman Shakib Fuad" style={{ width: "100%", height: "auto", display: "block" }} priority />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* SKILLS */}
+        <section id="skills" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <SectionTitle title="Tech Arsenal" sub="Technologies I work with" />
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: 16, marginTop: 40 }}>
+              {SKILLS.map(({ name, Icon, color }) => (
+                <motion.div key={name} variants={fadeUp} className="glass-card skill-card" style={{ borderRadius: 14, padding: "20px 12px", textAlign: "center", cursor: "default" }}>
+                  <Icon size={34} style={{ color, marginBottom: 10 }} />
+                  <p style={{ fontSize: 13, fontWeight: 500, color: "var(--text-secondary)" }}>{name}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* STATS */}
+        <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
+            {[
+              { num: "5+",   label: "Projects Completed",             icon: "🚀" },
+              { num: "6+",   label: "Months Learning Web Development", icon: "📚" },
+              { num: "100%", label: "Passion For Coding",              icon: "💜" },
+            ].map(({ num, label, icon }) => (
+              <motion.div key={label} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="glass-card stat-card" style={{ borderRadius: 16, padding: "28px 24px", textAlign: "center" }}>
+                <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
+                <p className="glow-text" style={{ fontSize: 36, fontWeight: 800, lineHeight: 1 }}>{num}</p>
+                <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8 }}>{label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* PROJECTS */}
+        <section id="projects" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <SectionTitle title="Featured Projects" sub="Things I've built" />
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24, marginTop: 40 }}>
+              {PROJECTS.map((p) => <ProjectCard key={p.title} {...p} />)}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CERTIFICATES */}
+        <section id="certificates" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <SectionTitle title="Certificates" sub="Achievements & recognitions" />
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "stretch", gap: 36, marginTop: 40 }}>
+              {CERTS.map(({ img, title, desc, badge, verify }) => (
+                <motion.div key={title} variants={fadeUp} className="glass-card cert-card" style={{ borderRadius: 18, width: 420, maxWidth: "100%", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+                  <div style={{ overflow: "hidden", borderRadius: "18px 18px 0 0", height: 230, flexShrink: 0 }}>
+                    <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </div>
+                  <div style={{ padding: 22, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "var(--purple-light)", background: "rgba(124,58,237,0.12)", borderRadius: 6, padding: "3px 10px", letterSpacing: 0.4, alignSelf: "flex-start" }}>{badge}</span>
+                    <h3 style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.4 }}>{title}</h3>
+                    <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, flex: 1 }}>{desc}</p>
+                    {verify && (
+                      <a href={verify} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: "var(--purple-light)", display: "flex", alignItems: "center", gap: 5, textDecoration: "none", fontWeight: 600, marginTop: 4 }}>
+                        <FaExternalLinkAlt size={11} /> Verify Certificate
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ╔══════════════════════════════╗
+            ║  EDUCATION TIMELINE          ║
+            ╚══════════════════════════════╝ */}
+        <section id="timeline" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
+          <div style={{ maxWidth: 800, margin: "0 auto" }}>
+            <SectionTitle title="Education Journey" sub="My academic milestones" />
+            <div style={{ position: "relative", marginTop: 50 }}>
+              {/* Vertical line */}
+              <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 2, background: "linear-gradient(180deg, #7c3aed, #2563eb, #7c3aed)", transform: "translateX(-50%)", opacity: 0.4 }} />
+
+              {TIMELINE.map(({ year, title, subtitle, desc, result, Icon, color }, i) => {
+                const isLeft = i % 2 === 0;
+                return (
+                  <motion.div
+                    key={year}
+                    initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    viewport={{ once: true }}
+                    style={{
+                      display: "flex",
+                      justifyContent: isLeft ? "flex-start" : "flex-end",
+                      marginBottom: 40,
+                      position: "relative",
+                    }}
+                  >
+                    {/* Card */}
+                    <div
+                      className="glass-card"
+                      style={{
+                        width: "44%",
+                        borderRadius: 16,
+                        padding: "20px 22px",
+                        position: "relative",
+                        borderLeft: isLeft ? `3px solid ${color}` : "none",
+                        borderRight: !isLeft ? `3px solid ${color}` : "none",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                        <Icon size={20} style={{ color }} />
+                        <span style={{ fontSize: 13, fontWeight: 700, color, letterSpacing: 1 }}>{year}</span>
+                      </div>
+                      <h3 style={{ fontSize: 17, fontWeight: 800, color: "var(--text-primary)", marginBottom: 3 }}>{title}</h3>
+                      <p style={{ fontSize: 12, color: "var(--purple-light)", fontWeight: 600, marginBottom: 6 }}>{subtitle}</p>
+                      <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 8 }}>{desc}</p>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", background: color, borderRadius: 20, padding: "3px 10px" }}>{result}</span>
+                    </div>
+
+                    {/* Center dot */}
+                    <div style={{
+                      position: "absolute", left: "50%", top: "50%",
+                      transform: "translate(-50%, -50%)",
+                      width: 14, height: 14, borderRadius: "50%",
+                      background: color,
+                      boxShadow: `0 0 10px ${color}, 0 0 20px ${color}40`,
+                      zIndex: 2,
+                    }} />
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ╔══════════════════════════════╗
+            ║  GITHUB CONTRIBUTION GRAPH   ║
+            ╚══════════════════════════════╝ */}
+        <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <SectionTitle title="GitHub Activity" sub="My open source contributions" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }} viewport={{ once: true }}
+              className="glass-card"
+              style={{ borderRadius: 20, padding: 28, marginTop: 40, textAlign: "center", overflow: "hidden" }}
+            >
+              <img
+                src="https://ghchart.rshah.org/7c3aed/Shadman-Shakib-Fuad"
+                alt="GitHub Contribution Graph"
+                style={{ width: "100%", maxWidth: 900, borderRadius: 8, filter: "brightness(1.1)" }}
+              />
+              <div style={{ marginTop: 16, display: "flex", justifyContent: "center", gap: 20, flexWrap: "wrap" }}>
+                <a
+                  href="https://github.com/Shadman-Shakib-Fuad"
+                  target="_blank" rel="noopener noreferrer"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--purple-light)", textDecoration: "none", fontSize: 14, fontWeight: 600 }}
+                >
+                  <FaGithub size={16} /> View GitHub Profile
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
+          <div style={{ maxWidth: 600, margin: "0 auto" }}>
+            <SectionTitle title="Get In Touch" sub="I'd love to hear from you" />
+            <motion.form onSubmit={handleForm} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="glass-card" style={{ borderRadius: 20, padding: 36, marginTop: 40, display: "flex", flexDirection: "column", gap: 18 }}>
+              <div>
+                <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Name</label>
+                <input className="form-input" type="text" placeholder="Your full name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
+              </div>
+              <div>
+                <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Email</label>
+                <input className="form-input" type="email" placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+              </div>
+              <div>
+                <label style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 6, display: "block" }}>Message</label>
+                <textarea className="form-input" placeholder="Write your message..." rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required style={{ resize: "vertical" }} />
+              </div>
+              <button type="submit" disabled={sending} className="glow-btn" style={{ padding: "13px 0", borderRadius: 10, background: sending ? "rgba(124,58,237,0.5)" : "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: sending ? "not-allowed" : "pointer", letterSpacing: 0.5, transition: "all 0.3s ease", opacity: sending ? 0.7 : 1 }}>
+                {sending ? "⏳ Sending..." : formSent ? "✅ Message Sent!" : sendError ? "❌ Failed! Try Again" : "Send Message"}
+              </button>
+            </motion.form>
+          </div>
+        </section>
+
+        {/* BIOGRAPHY */}
+        <section id="about" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
+            <SectionTitle title="Biography" sub="A little about me" />
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="glass-card" style={{ borderRadius: 20, overflow: "hidden", marginTop: 40 }}>
+              {BIO.map(({ label, value }, i) => (
+                <motion.div key={label} variants={fadeUp} className="bio-row" style={{ display: "grid", gridTemplateColumns: "180px 1fr", padding: "16px 28px", borderBottom: i < BIO.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none", gap: 12, alignItems: "center" }}>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--purple-light)", letterSpacing: 0.3 }}>{label} :</span>
+                  <span style={{ fontSize: 14, color: "var(--text-primary)", lineHeight: 1.6 }}>{value}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <footer style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(124,58,237,0.25)", boxShadow: "0 -1px 30px rgba(124,58,237,0.08)", padding: "40px 24px 30px", textAlign: "center" }}>
+          <p className="glow-text" style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>Md. Shadman Shakib Fuad</p>
+          <p style={{ fontSize: 13, color: "var(--purple-light)", marginBottom: 8 }}>Frontend Web Developer</p>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 20 }}>Crafting modern digital experiences with code &amp; creativity.</p>
+          <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 24 }}>
+            {[
+              { Icon: FaGithub,    href: "https://github.com/Shadman-Shakib-Fuad" },
+              { Icon: FaLinkedin,  href: "https://www.linkedin.com/in/md-shadman-shakib-fuad-435009317/" },
+              { Icon: FaFacebook,  href: "https://www.facebook.com/shadmanshakib.fuad" },
+              { Icon: FaInstagram, href: "https://www.instagram.com/shadman.shakib.fuad/" },
+            ].map(({ Icon, href }, i) => (
+              <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="social-icon glass-card" style={{ width: 38, height: 38, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--purple-light)" }}>
+                <Icon size={15} />
+              </a>
+            ))}
+          </div>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 50, padding: "7px 18px", marginBottom: 16, fontSize: 13, color: "var(--text-secondary)" }}>
+            <span style={{ fontSize: 16 }}>👁️</span>
+            <span>
+              {visitors !== null ? (
+                <><span style={{ fontWeight: 700, color: "var(--purple-light)" }}>{typeof visitors === "number" ? visitors.toLocaleString() : visitors}</span>{" "}total visitors</>
+              ) : (
+                <span>Loading visitors...</span>
+              )}
+            </span>
+          </motion.div>
+          <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
+        </footer>
+
+      </div>
+    </>
   );
 }
 
