@@ -18,10 +18,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ─── GPU Acceleration ─── */
+.float-anim,
+.glass-card,
+.skill-card,
+.project-card,
+.cert-card,
+.stat-card,
+.bio-row,
+.social-icon {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 body {

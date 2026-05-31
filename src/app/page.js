@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,6 +17,7 @@ import {
 } from "react-icons/si";
 import ownPic from "../picture/own-pic.png";
 import Lenis from "lenis";
+import confetti from "canvas-confetti";
 import { AnimatedStats, ServicesSection, SkillsProgress, FAQSection, WhatsAppButton, CurrentlyLearning, WaveDivider } from "../components/ExtraSections";
 
 const NAV_LINKS = ["Home", "Skills", "Projects", "Certificates", "Contact", "About"];
@@ -65,11 +66,12 @@ const SKILLS = [
 ];
 
 const PROJECTS = [
-  { title: "DocAppoint",      url: "https://doc-appoint-olive.vercel.app/",     desc: "Modern Doctor Appointment Booking Platform.",  tag: "Healthcare · React · Firebase",  preview: "/projects/docappoint.PNG"      },
-  { title: "Mango",           url: "https://mango-sage.vercel.app/",            desc: "Modern online bookstore web application.",      tag: "E-Commerce · Next.js · Tailwind", preview: "/projects/mango.PNG"           },
-  { title: "React Website",   url: "https://cozy-pika-83908a.netlify.app/",     desc: "Creative React based animated UI website.",     tag: "UI · React · Framer Motion",     preview: "/projects/react-website.PNG"   },
-  { title: "Creative Agency", url: "https://prismatic-pie-cf7807.netlify.app/", desc: "Animated digital agency landing page.",         tag: "Agency · Animation · CSS",       preview: "/projects/creative-agency.PNG" },
+  { title: "DocAppoint",      url: "https://doc-appoint-olive.vercel.app/",     desc: "Modern Doctor Appointment Booking Platform.",  tag: "Healthcare · React · Firebase",  preview: "/projects/docappoint.PNG",      filter: ["All", "React", "Firebase"] },
+  { title: "Mango",           url: "https://mango-sage.vercel.app/",            desc: "Modern online bookstore web application.",      tag: "E-Commerce · Next.js · Tailwind", preview: "/projects/mango.PNG",           filter: ["All", "Next.js", "Tailwind"] },
+  { title: "React Website",   url: "https://cozy-pika-83908a.netlify.app/",     desc: "Creative React based animated UI website.",     tag: "UI · React · Framer Motion",     preview: "/projects/react-website.PNG",   filter: ["All", "React"] },
+  { title: "Creative Agency", url: "https://prismatic-pie-cf7807.netlify.app/", desc: "Animated digital agency landing page.",         tag: "Agency · Animation · CSS",       preview: "/projects/creative-agency.PNG", filter: ["All", "CSS"] },
 ];
+const PROJECT_FILTERS = ["All", "React", "Next.js", "Firebase", "Tailwind", "CSS"];
 
 const CERTS = [
   { img: "/certificate/certificate1.png", title: "AI CodeLab Program 2026",           desc: "Awarded for gaining foundational knowledge of modern AI concepts, Agentic AI, and real-world AI solution design — organized by IEEE CS SEU SBC & Dept. of CSE, Southeast University in collaboration with Learn With Sumit.", badge: "Certificate of Appreciation" },
@@ -217,12 +219,51 @@ function TechIcon({ Icon, top, left, size, index }) {
   );
 }
 
-// ── Project Card ──────────────────────────────────────────────
+// ── Project Card with 3D Tilt ─────────────────────────────────
 function ProjectCard({ title, url, desc, tag, preview }) {
   const [hovered, setHovered] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * -8;
+    const tiltY = ((x - centerX) / centerX) * 8;
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+    setTilt({ x: 0, y: 0 });
+  };
+
   return (
-    <motion.div variants={fadeUp} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-      style={{ borderRadius: 16, overflow: "hidden", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", transition: "transform 0.3s ease, box-shadow 0.3s ease", transform: hovered ? "translateY(-6px)" : "translateY(0)", boxShadow: hovered ? "0 0 30px rgba(124,58,237,0.3)" : "none" }}>
+    <motion.div
+      ref={cardRef}
+      variants={fadeUp}
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        borderRadius: 16, overflow: "hidden",
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        backdropFilter: "blur(12px)",
+        boxShadow: hovered ? "0 0 30px rgba(124,58,237,0.3)" : "0 4px 20px rgba(0,0,0,0.2)",
+        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(${hovered ? -6 : 0}px)`,
+        transition: hovered ? "box-shadow 0.3s ease" : "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        willChange: "transform",
+      }}>
       <div style={{ position: "relative", height: 180, overflow: "hidden", background: "#0d0d1a" }}>
         <img src={preview} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
         <AnimatePresence>
@@ -370,6 +411,7 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showTop, setShowTop]               = useState(false);
   const [cvPreview, setCvPreview]           = useState(false);
+  const [activeFilter, setActiveFilter]     = useState("All");
   const [toast, setToast]                   = useState(null);
 
   const showToast = (msg, type = "success") => {
@@ -415,7 +457,7 @@ export default function Home() {
   // ── Lenis smooth scroll ──
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 0.9,
@@ -456,6 +498,9 @@ export default function Home() {
       setFormSent(true);
       setFormData({ name: "", email: "", message: "" });
       showToast("✅ Message sent! I'll get back to you soon.");
+      // 🎉 Confetti!
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.7 }, colors: ["#a78bfa", "#60a5fa", "#f472b6", "#34d399", "#fff"] });
+      setTimeout(() => confetti({ particleCount: 60, spread: 50, origin: { y: 0.6 }, colors: ["#a78bfa", "#2563eb"] }), 400);
       setTimeout(() => setFormSent(false), 4000);
     } catch (err) {
       setSendError(true);
@@ -671,8 +716,36 @@ export default function Home() {
         <section id="projects" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <SectionTitle title="Featured Projects" sub="Things I've built" />
-            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24, marginTop: 40 }}>
-              {PROJECTS.map((p) => <ProjectCard key={p.title} {...p} />)}
+
+            {/* Filter Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }}
+              style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", marginTop: 32, marginBottom: 8 }}
+            >
+              {PROJECT_FILTERS.map((f) => (
+                <motion.button key={f} onClick={() => setActiveFilter(f)}
+                  whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }}
+                  style={{
+                    padding: "8px 20px", borderRadius: 50, border: "none", cursor: "pointer",
+                    fontSize: 13, fontWeight: 600, letterSpacing: 0.3,
+                    background: activeFilter === f ? "linear-gradient(135deg, #7c3aed, #2563eb)" : "rgba(255,255,255,0.05)",
+                    color: activeFilter === f ? "#fff" : "var(--text-secondary)",
+                    boxShadow: activeFilter === f ? "0 0 16px rgba(124,58,237,0.4)" : "none",
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  {f}
+                </motion.button>
+              ))}
+            </motion.div>
+
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24, marginTop: 24 }}>
+              <AnimatePresence mode="popLayout">
+                {PROJECTS.filter((p) => p.filter.includes(activeFilter)).map((p) => (
+                  <ProjectCard key={p.title} {...p} />
+                ))}
+              </AnimatePresence>
             </motion.div>
           </div>
         </section>
