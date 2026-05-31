@@ -133,6 +133,15 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } } };
 
+// ── Haptic feedback helper ────────────────────────────────────
+const haptic = {
+  light:   () => navigator?.vibrate?.(10),
+  medium:  () => navigator?.vibrate?.(25),
+  heavy:   () => navigator?.vibrate?.(50),
+  success: () => navigator?.vibrate?.([15, 50, 15]),
+  error:   () => navigator?.vibrate?.([50, 30, 50, 30, 50]),
+};
+
 // ── Page Loading Screen ───────────────────────────────────────
 function LoadingScreen({ onDone }) {
   useEffect(() => {
@@ -489,6 +498,7 @@ export default function Home() {
 
   const handleForm = async (e) => {
     e.preventDefault();
+    haptic.medium();
     setSending(true);
     setSendError(false);
     try {
@@ -497,6 +507,7 @@ export default function Home() {
       if (!res.ok) throw new Error(data.error || "Failed");
       setFormSent(true);
       setFormData({ name: "", email: "", message: "" });
+      haptic.success();
       showToast("✅ Message sent! I'll get back to you soon.");
       // 🎉 Confetti!
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.7 }, colors: ["#a78bfa", "#60a5fa", "#f472b6", "#34d399", "#fff"] });
@@ -504,6 +515,7 @@ export default function Home() {
       setTimeout(() => setFormSent(false), 4000);
     } catch (err) {
       setSendError(true);
+      haptic.error();
       showToast("❌ Failed to send. Please try again.", "error");
       setTimeout(() => setSendError(false), 4000);
     } finally { setSending(false); }
@@ -540,11 +552,11 @@ export default function Home() {
             <ul style={{ display: "flex", gap: 8, listStyle: "none" }} className="hidden md:flex">
               {NAV_LINKS.map((link) => (
                 <li key={link}>
-                  <button onClick={() => scrollTo(link.toLowerCase())} style={{ background: "none", border: "none", cursor: "pointer", padding: "6px 14px", borderRadius: 8, fontSize: 14, fontWeight: 500, letterSpacing: 0.3, transition: "all 0.25s ease", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", borderBottom: activeSection === link ? "2px solid var(--purple-glow)" : "2px solid transparent", textShadow: activeSection === link ? "0 0 10px rgba(167,139,250,0.5)" : "none" }}>{link}</button>
+                  <button onClick={() => { haptic.light(); scrollTo(link.toLowerCase()); }} style={{ background: "none", border: "none", cursor: "pointer", padding: "6px 14px", borderRadius: 8, fontSize: 14, fontWeight: 500, letterSpacing: 0.3, transition: "all 0.25s ease", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", borderBottom: activeSection === link ? "2px solid var(--purple-glow)" : "2px solid transparent", textShadow: activeSection === link ? "0 0 10px rgba(167,139,250,0.5)" : "none" }}>{link}</button>
                 </li>
               ))}
             </ul>
-            <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-primary)", padding: 8 }}>
+            <button className="md:hidden" onClick={() => { haptic.light(); setMenuOpen(!menuOpen); }} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-primary)", padding: 8 }}>
               {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
           </div>
@@ -552,7 +564,7 @@ export default function Home() {
             {menuOpen && (
               <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} style={{ background: "rgba(9,9,15,0.97)", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "12px 0" }}>
                 {NAV_LINKS.map((link) => (
-                  <button key={link} onClick={() => scrollTo(link.toLowerCase())} style={{ display: "block", width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", padding: "12px 24px", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", fontSize: 15, fontWeight: 500 }}>{link}</button>
+                  <button key={link} onClick={() => { haptic.light(); scrollTo(link.toLowerCase()); }} style={{ display: "block", width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", padding: "12px 24px", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", fontSize: 15, fontWeight: 500 }}>{link}</button>
                 ))}
               </motion.div>
             )}
@@ -595,8 +607,8 @@ export default function Home() {
                 Passionate Frontend Developer from Bangladesh focused on building beautiful, interactive and high-performance modern web applications with exceptional UI/UX experiences.
               </p>
               <div className="hero-btns" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
-                <button className="glow-btn" onClick={() => scrollTo("projects")} style={{ padding: "12px 24px", borderRadius: 10, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>Explore Projects</button>
-                <button className="glow-btn" onClick={() => scrollTo("about")} style={{ padding: "12px 24px", borderRadius: 10, background: "transparent", border: "1px solid rgba(124,58,237,0.5)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>More About Me</button>
+                <button className="glow-btn" onClick={() => { haptic.medium(); scrollTo("projects"); }} style={{ padding: "12px 24px", borderRadius: 10, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>Explore Projects</button>
+                <button className="glow-btn" onClick={() => { haptic.medium(); scrollTo("about"); }} style={{ padding: "12px 24px", borderRadius: 10, background: "transparent", border: "1px solid rgba(124,58,237,0.5)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4 }}>More About Me</button>
                 <a href="/cv/shadman-cv.pdf" download className="glow-btn" style={{ padding: "12px 24px", borderRadius: 10, background: "rgba(124,58,237,0.12)", border: "1px solid rgba(167,139,250,0.3)", color: "var(--purple-light)", fontWeight: 600, fontSize: 14, cursor: "pointer", letterSpacing: 0.4, display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
                   <FaDownload size={13} /> Download CV
                 </a>
@@ -724,7 +736,7 @@ export default function Home() {
               style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center", marginTop: 32, marginBottom: 8 }}
             >
               {PROJECT_FILTERS.map((f) => (
-                <motion.button key={f} onClick={() => setActiveFilter(f)}
+                <motion.button key={f} onClick={() => { haptic.light(); setActiveFilter(f); }}
                   whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }}
                   style={{
                     padding: "8px 20px", borderRadius: 50, border: "none", cursor: "pointer",
@@ -1006,7 +1018,7 @@ export default function Home() {
           {cvPreview && (
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setCvPreview(false)}
+              onClick={() => { haptic.light(); setCvPreview(false); }}
               style={{ position: "fixed", inset: 0, zIndex: 9998, background: "rgba(0,0,0,0.85)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, backdropFilter: "blur(6px)" }}
             >
               <motion.div
@@ -1023,7 +1035,7 @@ export default function Home() {
                       style={{ padding: "7px 16px", borderRadius: 8, background: "linear-gradient(135deg, #7c3aed, #2563eb)", color: "#fff", fontWeight: 600, fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
                       <FaDownload size={12} /> Download
                     </a>
-                    <button onClick={() => setCvPreview(false)}
+                    <button onClick={() => { haptic.light(); setCvPreview(false); }}
                       style={{ background: "rgba(255,255,255,0.06)", border: "none", color: "#94a3b8", cursor: "pointer", borderRadius: 8, padding: "7px 12px", fontSize: 18, lineHeight: 1 }}>
                       ✕
                     </button>
@@ -1072,7 +1084,7 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.5, y: 20 }}
               transition={{ duration: 0.5, type: "spring", stiffness: 180, damping: 22, mass: 1.1 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              onClick={() => { haptic.light(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               style={{
                 position: "fixed", bottom: 154, right: 24, zIndex: 50,
                 width: 52, height: 52, borderRadius: "50%",
