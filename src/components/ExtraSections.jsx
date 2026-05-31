@@ -6,7 +6,7 @@ import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 
@@ -55,8 +55,9 @@ export function AnimatedStats() {
         {stats.map(({ num, suffix, label, icon }) => (
           <motion.div key={label}
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            whileHover={{ y: -5, boxShadow: "0 0 22px rgba(124,58,237,0.3)" }}
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", borderRadius: 16, padding: "28px 24px", textAlign: "center", transition: "all 0.3s ease" }}>
+            whileHover={{ y: -8, boxShadow: "0 0 32px rgba(124,58,237,0.4)", transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", borderRadius: 16, padding: "28px 24px", textAlign: "center", transition: "box-shadow 0.3s ease, transform 0.3s ease" }}>
             <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
             <p style={{ fontSize: 36, fontWeight: 800, lineHeight: 1, background: "linear-gradient(135deg, #a78bfa, #60a5fa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               {num}{suffix}
@@ -116,8 +117,8 @@ export function ServicesSection() {
           style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 24 }}>
           {services.map(({ icon, title, desc, color, price }) => (
             <motion.div key={title} variants={fadeUp}
-              whileHover={{ y: -6, boxShadow: `0 0 28px ${color}33` }}
-              style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${color}25`, backdropFilter: "blur(12px)", borderRadius: 18, padding: 28, display: "flex", flexDirection: "column", gap: 14, transition: "all 0.3s ease", borderTop: `3px solid ${color}` }}>
+              whileHover={{ y: -8, boxShadow: `0 0 36px ${color}50`, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
+              style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${color}25`, backdropFilter: "blur(12px)", borderRadius: 18, padding: 28, display: "flex", flexDirection: "column", gap: 14, transition: "box-shadow 0.3s ease, transform 0.3s ease", borderTop: `3px solid ${color}` }}>
               <div style={{ color, width: 52, height: 52, background: `${color}15`, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>{icon}</div>
               <h3 style={{ fontSize: 17, fontWeight: 700, color: "#f1f5f9" }}>{title}</h3>
               <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7, flex: 1 }}>{desc}</p>
@@ -166,7 +167,7 @@ export function SkillsProgress() {
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: `${level}%` }}
-                  transition={{ duration: 1, ease: "easeOut" }}
+                  transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
                   viewport={{ once: true }}
                   style={{ height: "100%", background: `linear-gradient(90deg, ${color}, ${color}99)`, borderRadius: 4, boxShadow: `0 0 8px ${color}66` }}
                 />
@@ -207,7 +208,7 @@ export function FAQSection() {
               <button onClick={() => setOpen(open === i ? null : i)}
                 style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 22px", background: "none", border: "none", cursor: "pointer", color: "#f1f5f9", fontSize: 14, fontWeight: 600, textAlign: "left", gap: 12 }}>
                 <span>{q}</span>
-                <motion.span animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.25 }} style={{ color: "#a78bfa", flexShrink: 0 }}>
+                <motion.span animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }} style={{ color: "#a78bfa", flexShrink: 0 }}>
                   <FaChevronDown size={14} />
                 </motion.span>
               </button>
@@ -217,7 +218,7 @@ export function FAQSection() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25 }}>
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}>
                     <p style={{ padding: "0 22px 18px", fontSize: 13, color: "#94a3b8", lineHeight: 1.75 }}>{a}</p>
                   </motion.div>
                 )}
@@ -243,10 +244,11 @@ export function WhatsAppButton() {
           initial={{ opacity: 0, scale: 0, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.4, type: "spring" }}
-          whileHover={{ scale: 1.12 }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 180, damping: 20, mass: 1.1 }}
+          whileHover={{ scale: 1.12, boxShadow: "0 0 30px rgba(37,211,102,0.7)", transition: { duration: 0.2 } }}
+          whileTap={{ scale: 0.95 }}
           style={{
-            position: "fixed", bottom: 90, left: 24, zIndex: 50,
+            position: "fixed", bottom: 90, right: 24, zIndex: 50,
             width: 52, height: 52, borderRadius: "50%",
             background: "linear-gradient(135deg, #25d366, #128c7e)",
             display: "flex", alignItems: "center", justifyContent: "center",

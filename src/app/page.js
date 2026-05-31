@@ -16,6 +16,7 @@ import {
   SiMongodb, SiExpress, SiC,
 } from "react-icons/si";
 import ownPic from "../picture/own-pic.png";
+import Lenis from "lenis";
 import { AnimatedStats, ServicesSection, SkillsProgress, FAQSection, WhatsAppButton, CurrentlyLearning, WaveDivider } from "../components/ExtraSections";
 
 const NAV_LINKS = ["Home", "Skills", "Projects", "Certificates", "Contact", "About"];
@@ -125,10 +126,10 @@ const BIO = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 28 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } } };
 
 // ── Page Loading Screen ───────────────────────────────────────
 function LoadingScreen({ onDone }) {
@@ -141,7 +142,7 @@ function LoadingScreen({ onDone }) {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       style={{
         position: "fixed", inset: 0, zIndex: 9999,
         background: "#09090f",
@@ -187,7 +188,7 @@ function LoadingScreen({ onDone }) {
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
-          transition={{ duration: 1.8, ease: "easeInOut" }}
+          transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
           style={{ height: "100%", background: "linear-gradient(90deg, #7c3aed, #2563eb)", borderRadius: 4 }}
         />
       </div>
@@ -226,7 +227,7 @@ function ProjectCard({ title, url, desc, tag, preview }) {
         <img src={preview} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
         <AnimatePresence>
           {hovered && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               style={{ position: "absolute", inset: 0, background: "rgba(124,58,237,0.75)", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <a href={url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}
                 style={{ display: "flex", alignItems: "center", gap: 8, background: "#fff", color: "#7c3aed", padding: "10px 22px", borderRadius: 50, fontWeight: 700, fontSize: 14, textDecoration: "none", boxShadow: "0 4px 20px rgba(0,0,0,0.2)" }}>
@@ -411,6 +412,25 @@ export default function Home() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  // ── Lenis smooth scroll ──
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.5,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
+  }, []);
+
   // ── Scroll progress + back to top ──
   useEffect(() => {
     const handleScroll = () => {
@@ -485,7 +505,7 @@ export default function Home() {
           </div>
           <AnimatePresence>
             {menuOpen && (
-              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }} style={{ background: "rgba(9,9,15,0.97)", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "12px 0" }}>
+              <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} style={{ background: "rgba(9,9,15,0.97)", borderTop: "1px solid rgba(255,255,255,0.07)", padding: "12px 0" }}>
                 {NAV_LINKS.map((link) => (
                   <button key={link} onClick={() => scrollTo(link.toLowerCase())} style={{ display: "block", width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", padding: "12px 24px", color: activeSection === link ? "var(--purple-light)" : "var(--text-secondary)", fontSize: 15, fontWeight: 500 }}>{link}</button>
                 ))}
@@ -511,7 +531,7 @@ export default function Home() {
         {/* HERO */}
         <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", zIndex: 1, maxWidth: 1200, margin: "0 auto", padding: "80px 24px 60px" }}>
           <div className="hero-two-col" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40, width: "100%", flexWrap: "wrap" }}>
-            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: "easeOut" }} style={{ flex: "1 1 340px" }}>
+            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} style={{ flex: "1 1 340px" }}>
               <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
                 <span style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: 50, padding: "6px 16px", fontSize: 13, fontWeight: 600, color: "#4ade80", letterSpacing: 0.5 }}>
                   <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.4)", display: "inline-block", animation: "pulse-dot 1.8s ease-in-out infinite" }} />
@@ -549,7 +569,7 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
-            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }} style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
               <div className="float-anim" style={{ position: "relative", width: "clamp(240px, 30vw, 340px)" }}>
                 <div style={{ position: "absolute", inset: -4, borderRadius: 24, background: "linear-gradient(135deg, #7c3aed, #2563eb, #7c3aed)", padding: 3, zIndex: 0, filter: "blur(2px)", opacity: 0.85 }} />
                 <div style={{ position: "relative", borderRadius: 22, overflow: "hidden", zIndex: 1, boxShadow: "0 0 40px rgba(124,58,237,0.4), 0 0 80px rgba(37,99,235,0.2)" }}>
@@ -917,8 +937,8 @@ export default function Home() {
               style={{ position: "fixed", inset: 0, zIndex: 9998, background: "rgba(0,0,0,0.85)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, backdropFilter: "blur(6px)" }}
             >
               <motion.div
-                initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.85, opacity: 0 }}
-                transition={{ duration: 0.25 }}
+                initial={{ scale: 0.88, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.88, opacity: 0, y: 20 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 onClick={(e) => e.stopPropagation()}
                 style={{ background: "#0d0d1a", borderRadius: 20, overflow: "hidden", width: "100%", maxWidth: 800, maxHeight: "90vh", display: "flex", flexDirection: "column", border: "1px solid rgba(124,58,237,0.3)", boxShadow: "0 0 60px rgba(124,58,237,0.3)" }}
               >
@@ -947,10 +967,10 @@ export default function Home() {
         <AnimatePresence>
           {toast && (
             <motion.div
-              initial={{ opacity: 0, y: 60, x: "-50%" }}
+              initial={{ opacity: 0, y: 40, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
-              exit={{ opacity: 0, y: 60, x: "-50%" }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
+              exit={{ opacity: 0, y: 40, x: "-50%" }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: "fixed", bottom: 90, left: "50%",
                 zIndex: 9999,
@@ -978,19 +998,19 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.5, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.5, y: 20 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.5, type: "spring", stiffness: 180, damping: 22, mass: 1.1 }}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               style={{
-                position: "fixed", bottom: 32, right: 24, zIndex: 50,
-                width: 46, height: 46, borderRadius: "50%",
+                position: "fixed", bottom: 154, right: 24, zIndex: 50,
+                width: 52, height: 52, borderRadius: "50%",
                 background: "linear-gradient(135deg, #7c3aed, #2563eb)",
                 border: "none", cursor: "pointer",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 boxShadow: "0 0 20px rgba(124,58,237,0.5)",
-                color: "#fff", fontSize: 18,
+                color: "#fff", fontSize: 20,
               }}
-              whileHover={{ scale: 1.15, boxShadow: "0 0 28px rgba(124,58,237,0.7)" }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.12, boxShadow: "0 0 32px rgba(124,58,237,0.7)", transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
+              whileTap={{ scale: 0.92 }}
               aria-label="Back to top"
             >
               ↑
@@ -1005,7 +1025,7 @@ export default function Home() {
 
 function SectionTitle({ title, sub }) {
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 8 }}>
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 8 }}>
       <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, marginBottom: 4 }}>
         <span className="glow-text">{title}</span>
       </h2>
