@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp, FaCode, FaMobileAlt, FaPaintBrush, FaServer, FaChevronDown, FaReact } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
@@ -10,57 +10,25 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 
-// ── Animated Counter Hook ──────────────────────────────────────
-function useCountUp(target, duration = 1800, inView = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) { setCount(target); clearInterval(timer); }
-      else setCount(Math.floor(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [inView, target, duration]);
-  return count;
-}
-
-// ── Animated Stats ─────────────────────────────────────────────
+// ── Static Stats ──────────────────────────────────────────────
 export function AnimatedStats() {
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold: 0.5 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
-  const projects  = useCountUp(5,  1500, inView);
-  const months    = useCountUp(6,  1500, inView);
-  const commits   = useCountUp(80, 2000, inView);
-  const passion   = useCountUp(100,2000, inView);
-
   const stats = [
-    { num: projects,  suffix: "+", label: "Projects Completed",      icon: "🚀" },
-    { num: months,    suffix: "+", label: "Months of Learning",       icon: "📚" },
-    { num: commits,   suffix: "+", label: "GitHub Commits",           icon: "💻" },
-    { num: passion,   suffix: "%", label: "Passion for Coding",       icon: "💜" },
+    { num: "5+",   label: "Projects Completed",  icon: "🚀" },
+    { num: "6+",   label: "Months of Learning",  icon: "📚" },
+    { num: "80+",  label: "GitHub Commits",       icon: "💻" },
+    { num: "100%", label: "Passion for Coding",   icon: "💜" },
   ];
-
   return (
-    <section ref={ref} style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
+    <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 20 }}>
-        {stats.map(({ num, suffix, label, icon }) => (
+        {stats.map(({ num, label, icon }) => (
           <motion.div key={label}
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            whileHover={{ y: -8, boxShadow: "0 0 32px rgba(124,58,237,0.4)", transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", borderRadius: 16, padding: "28px 24px", textAlign: "center", transition: "box-shadow 0.3s ease, transform 0.3s ease" }}>
+            whileHover={{ y: -5, boxShadow: "0 0 22px rgba(124,58,237,0.3)" }}
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", backdropFilter: "blur(12px)", borderRadius: 16, padding: "28px 24px", textAlign: "center", transition: "all 0.3s ease" }}>
             <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
             <p style={{ fontSize: 36, fontWeight: 800, lineHeight: 1, background: "linear-gradient(135deg, #a78bfa, #60a5fa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              {num}{suffix}
+              {num}
             </p>
             <p style={{ fontSize: 13, color: "#94a3b8", marginTop: 8 }}>{label}</p>
           </motion.div>
@@ -164,13 +132,7 @@ export function SkillsProgress() {
                 <span style={{ fontSize: 12, color, fontWeight: 700 }}>{level}%</span>
               </div>
               <div style={{ height: 7, background: "rgba(255,255,255,0.06)", borderRadius: 4, overflow: "hidden" }}>
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${level}%` }}
-                  transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                  viewport={{ once: true }}
-                  style={{ height: "100%", background: `linear-gradient(90deg, ${color}, ${color}99)`, borderRadius: 4, boxShadow: `0 0 8px ${color}66` }}
-                />
+                <div style={{ width: `${level}%`, height: "100%", background: `linear-gradient(90deg, ${color}, ${color}99)`, borderRadius: 4, boxShadow: `0 0 8px ${color}66` }} />
               </div>
             </div>
           ))}
