@@ -132,7 +132,13 @@ export function SkillsProgress() {
                 <span style={{ fontSize: 12, color, fontWeight: 700 }}>{level}%</span>
               </div>
               <div style={{ height: 7, background: "rgba(255,255,255,0.06)", borderRadius: 4, overflow: "hidden" }}>
-                <div style={{ width: `${level}%`, height: "100%", background: `linear-gradient(90deg, ${color}, ${color}99)`, borderRadius: 4, boxShadow: `0 0 8px ${color}66` }} />
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${level}%` }}
+                  transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+                  viewport={{ once: true }}
+                  style={{ height: "100%", background: `linear-gradient(90deg, ${color}, ${color}99)`, borderRadius: 4, boxShadow: `0 0 8px ${color}66` }}
+                />
               </div>
             </div>
           ))}
