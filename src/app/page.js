@@ -145,7 +145,7 @@ const haptic = {
 // ── Page Loading Screen ───────────────────────────────────────
 function LoadingScreen({ onDone }) {
   useEffect(() => {
-    const t = setTimeout(onDone, 2200);
+    const t = setTimeout(onDone, 1500);
     return () => clearTimeout(t);
   }, [onDone]);
 
@@ -199,7 +199,7 @@ function LoadingScreen({ onDone }) {
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
-          transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
           style={{ height: "100%", background: "linear-gradient(90deg, #7c3aed, #2563eb)", borderRadius: 4 }}
         />
       </div>
