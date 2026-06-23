@@ -15,7 +15,7 @@ export function AnimatedStats() {
   const stats = [
     { num: "5+",   label: "Projects Completed",  icon: "🚀" },
     { num: "6+",   label: "Months of Learning",  icon: "📚" },
-    { num: "80+",  label: "GitHub Commits",       icon: "💻" },
+    { num: "250+",  label: "GitHub Commits",       icon: "💻" },
     { num: "100%", label: "Passion for Coding",   icon: "💜" },
   ];
   return (
