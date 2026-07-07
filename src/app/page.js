@@ -66,19 +66,20 @@ const SKILLS = [
 ];
 
 const PROJECTS = [
-  { title: "DocAppoint",      url: "https://doc-appoint-olive.vercel.app/",     desc: "Modern Doctor Appointment Booking Platform.",  tag: "Healthcare · React · Firebase",  preview: "/projects/docappoint.PNG",      filter: ["All", "React", "Firebase"] },
-  { title: "Mango",           url: "https://mango-sage.vercel.app/",            desc: "Modern online bookstore web application.",      tag: "E-Commerce · Next.js · Tailwind", preview: "/projects/mango.PNG",           filter: ["All", "Next.js", "Tailwind"] },
-  { title: "React Website",   url: "https://cozy-pika-83908a.netlify.app/",     desc: "Creative React based animated UI website.",     tag: "UI · React · Framer Motion",     preview: "/projects/react-website.PNG",   filter: ["All", "React"] },
-  { title: "Creative Agency", url: "https://prismatic-pie-cf7807.netlify.app/", desc: "Animated digital agency landing page.",         tag: "Agency · Animation · CSS",       preview: "/projects/creative-agency.PNG", filter: ["All", "CSS"] },
+  { title: "DocAppoint",           url: "https://doc-appoint-olive.vercel.app/",     desc: "Modern Doctor Appointment Booking Platform.",                                                                            tag: "Healthcare · React · Firebase",  preview: "/projects/docappoint.PNG",        filter: ["All", "React", "Firebase"]          },
+  { title: "Mango",                url: "https://mango-sage.vercel.app/",            desc: "Modern online bookstore web application.",                                                                               tag: "E-Commerce · Next.js · Tailwind", preview: "/projects/mango.PNG",             filter: ["All", "Next.js", "Tailwind"]        },
+  { title: "React Website",        url: "https://cozy-pika-83908a.netlify.app/",     desc: "Creative React based animated UI website.",                                                                              tag: "UI · React · Framer Motion",     preview: "/projects/react-website.PNG",     filter: ["All", "React"]                      },
+  { title: "Creative Agency",      url: "https://prismatic-pie-cf7807.netlify.app/", desc: "Animated digital agency landing page.",                                                                                  tag: "Agency · Animation · CSS",       preview: "/projects/creative-agency.PNG",   filter: ["All", "CSS"]                        },
+  { title: "Digital Life Lessons", url: "https://cat-three-mu.vercel.app/",          desc: "Full-stack platform to create, explore & save life lessons with JWT auth, Stripe payments, dashboard & admin panel.",  tag: "Full Stack · Next.js · MongoDB",  preview: "/projects/digital-lessons.png",   filter: ["All", "Next.js", "MongoDB"]         },
 ];
-const PROJECT_FILTERS = ["All", "React", "Next.js", "Firebase", "Tailwind", "CSS"];
+
+const PROJECT_FILTERS = ["All", "React", "Next.js", "Firebase", "Tailwind", "CSS", "Node.js", "MongoDB"];
 
 const CERTS = [
   { img: "/certificate/certificate1.png", title: "AI CodeLab Program 2026",           desc: "Awarded for gaining foundational knowledge of modern AI concepts, Agentic AI, and real-world AI solution design — organized by IEEE CS SEU SBC & Dept. of CSE, Southeast University in collaboration with Learn With Sumit.", badge: "Certificate of Appreciation" },
   { img: "/certificate/certificate2.png", title: "Introduction to CIP – OPSWAT Academy", desc: "Successfully graduated from the Introduction to CIP (Critical Infrastructure Protection) program by OPSWAT Academy. Issued May 15, 2026 · Valid until May 15, 2027 · ID: OPA8kq55gg", badge: "Verified Certificate", verify: "https://learn.opswatacademy.com/certificate/OPA8kq55gg" },
 ];
 
-// ── Education & Experience Timeline ──────────────────────────
 const TIMELINE = [
   { year: "2024", title: "B.Sc",  subtitle: "Computer Science & Engineering",       desc: "Southeast University, Dhaka — Currently Running",         result: "Running ⚡", Icon: FaUniversity,    color: "#f472b6" },
   { year: "2022", title: "HSC",   subtitle: "Higher Secondary Certificate",         desc: "Cantonment Public School & College, Rangpur",             result: "GPA 5.00",  Icon: FaGraduationCap, color: "#f59e0b" },
@@ -87,29 +88,10 @@ const TIMELINE = [
   { year: "2014", title: "PSC",   subtitle: "Primary School Certificate",           desc: "Bir Uttam Shaheed Samad School & College, Rangpur",       result: "GPA 5.00",  Icon: FaSchool,        color: "#a78bfa" },
 ];
 
-// ── Testimonials ─────────────────────────────────────────────
 const TESTIMONIALS = [
-  {
-    name: "Ariful Islam",
-    role: "Web Developer",
-    text: "Shadman is a highly dedicated developer. His attention to detail and passion for clean UI is remarkable. Loved collaborating with him!",
-    avatar: "AI",
-    color: "#a78bfa",
-  },
-  {
-    name: "Tanvir Ahmed",
-    role: "UI/UX Designer",
-    text: "Working with Shadman was a great experience. He understands design requirements quickly and implements them perfectly with code.",
-    avatar: "TA",
-    color: "#60a5fa",
-  },
-  {
-    name: "Rafiul Hasan",
-    role: "CSE Student, SEU",
-    text: "One of the most hardworking developers I know. Shadman always delivers quality work on time and goes the extra mile.",
-    avatar: "RH",
-    color: "#34d399",
-  },
+  { name: "Ariful Islam",  role: "Web Developer",    text: "Shadman is a highly dedicated developer. His attention to detail and passion for clean UI is remarkable. Loved collaborating with him!", avatar: "AI", color: "#a78bfa" },
+  { name: "Tanvir Ahmed",  role: "UI/UX Designer",   text: "Working with Shadman was a great experience. He understands design requirements quickly and implements them perfectly with code.",        avatar: "TA", color: "#60a5fa" },
+  { name: "Rafiul Hasan",  role: "CSE Student, SEU", text: "One of the most hardworking developers I know. Shadman always delivers quality work on time and goes the extra mile.",                   avatar: "RH", color: "#34d399" },
 ];
 
 const BIO = [
@@ -133,7 +115,6 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } } };
 
-// ── Haptic feedback helper ────────────────────────────────────
 const haptic = {
   light:   () => navigator?.vibrate?.(10),
   medium:  () => navigator?.vibrate?.(25),
@@ -142,7 +123,6 @@ const haptic = {
   error:   () => navigator?.vibrate?.([50, 30, 50, 30, 50]),
 };
 
-// ── Page Loading Screen ───────────────────────────────────────
 function LoadingScreen({ onDone }) {
   useEffect(() => {
     const t = setTimeout(onDone, 1500);
@@ -194,7 +174,6 @@ function LoadingScreen({ onDone }) {
         </motion.p>
       </motion.div>
 
-      {/* Loading bar */}
       <div style={{ width: 200, height: 3, background: "rgba(255,255,255,0.08)", borderRadius: 4, overflow: "hidden" }}>
         <motion.div
           initial={{ width: 0 }}
@@ -207,7 +186,6 @@ function LoadingScreen({ onDone }) {
   );
 }
 
-// ── TechIcon ──────────────────────────────────────────────────
 function TechIcon({ Icon, top, left, size, index }) {
   const duration = 6 + (index % 7) * 1.2;
   const delay    = (index * 0.85) % 6;
@@ -228,7 +206,6 @@ function TechIcon({ Icon, top, left, size, index }) {
   );
 }
 
-// ── Project Card with 3D Tilt ─────────────────────────────────
 function ProjectCard({ title, url, desc, tag, preview }) {
   const [hovered, setHovered] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -299,55 +276,48 @@ function ProjectCard({ title, url, desc, tag, preview }) {
   );
 }
 
-// ── GitHub Stats Component ────────────────────────────────────
 function GitHubStats() {
   const [stats, setStats] = useState(null);
   const [repos, setRepos]  = useState([]);
 
   useEffect(() => {
-    // Fetch user stats
     fetch("https://api.github.com/users/Shadman-Shakib-Fuad")
       .then((r) => r.json())
       .then((d) => setStats(d))
       .catch(() => {});
 
-    // Fetch repos for language count
     fetch("https://api.github.com/users/Shadman-Shakib-Fuad/repos?per_page=100")
       .then((r) => r.json())
       .then((d) => Array.isArray(d) && setRepos(d))
       .catch(() => {});
   }, []);
 
-  // Count total commits approximation from public repos
   const totalRepos   = stats?.public_repos ?? "—";
   const followers    = stats?.followers ?? "—";
   const following    = stats?.following ?? "—";
   const totalStars   = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
 
-  // Top languages
   const langMap = {};
   repos.forEach((r) => { if (r.language) langMap[r.language] = (langMap[r.language] || 0) + 1; });
   const topLangs = Object.entries(langMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
   const langColors = { JavaScript: "#f7df1e", TypeScript: "#3178c6", Python: "#3776ab", CSS: "#264de4", HTML: "#e34f26", "C++": "#a8b9cc", Java: "#007396", C: "#a8b9cc", Rust: "#ce412b", Go: "#00add8" };
 
   const statItems = [
-    { label: "Public Repos",  value: totalRepos, icon: "📁" },
+    { label: "Public Repos",  value: totalRepos,        icon: "📁" },
     { label: "Total Stars",   value: totalStars || "0", icon: "⭐" },
-    { label: "Followers",     value: followers,  icon: "👥" },
-    { label: "Following",     value: following,  icon: "➕" },
+    { label: "Followers",     value: followers,          icon: "👥" },
+    { label: "Following",     value: following,          icon: "➕" },
   ];
 
   return (
     <section style={{ position: "relative", zIndex: 1, padding: "20px 24px 80px" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <SectionTitle title="GitHub Activity" sub="My open source contributions" />
-
         <motion.div
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }} viewport={{ once: true }}
           style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 24 }}
         >
-          {/* Stat cards */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
             {statItems.map(({ label, value, icon }) => (
               <motion.div key={label} whileHover={{ y: -4, boxShadow: "0 0 20px rgba(124,58,237,0.3)" }}
@@ -360,7 +330,6 @@ function GitHubStats() {
             ))}
           </div>
 
-          {/* Top Languages */}
           {topLangs.length > 0 && (
             <div className="glass-card" style={{ borderRadius: 16, padding: 24 }}>
               <p style={{ fontSize: 14, fontWeight: 700, color: "var(--purple-light)", marginBottom: 16, letterSpacing: 0.5 }}>🧑‍💻 Top Languages</p>
@@ -393,7 +362,6 @@ function GitHubStats() {
             </div>
           )}
 
-          {/* Contribution graph */}
           <div className="glass-card" style={{ borderRadius: 16, padding: 24, textAlign: "center", overflow: "hidden" }}>
             <p style={{ fontSize: 14, fontWeight: 700, color: "var(--purple-light)", marginBottom: 16, letterSpacing: 0.5 }}>📅 Contribution Graph</p>
             <img
@@ -414,9 +382,8 @@ function GitHubStats() {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
 export default function Home() {
-  const [loading, setLoading]             = useState(true);
+  const [loading, setLoading]               = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showTop, setShowTop]               = useState(false);
   const [cvPreview, setCvPreview]           = useState(false);
@@ -427,6 +394,7 @@ export default function Home() {
     setToast({ msg, type });
     setTimeout(() => setToast(null), 3500);
   };
+
   const [activeSection, setActiveSection] = useState("Home");
   const [menuOpen, setMenuOpen]           = useState(false);
   const [formData, setFormData]           = useState({ name: "", email: "", message: "" });
@@ -435,7 +403,6 @@ export default function Home() {
   const [sendError, setSendError]         = useState(false);
   const [visitors, setVisitors]           = useState(null);
 
-  // ── Supabase visitor counter ──
   useEffect(() => {
     const SUPABASE_URL = "https://fekyjxjavcdhjhfenwtt.supabase.co";
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZla3lqeGphdmNkaGpoZmVud3R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NDk1ODksImV4cCI6MjA5NTQyNTU4OX0.qGLcBAcclezmimxQUmo6_r3qHpAe_pTaVnacCe7dLJ8";
@@ -463,7 +430,6 @@ export default function Home() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
-  // ── Lenis smooth scroll ──
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.8,
@@ -472,21 +438,15 @@ export default function Home() {
       wheelMultiplier: 0.9,
       touchMultiplier: 1.5,
     });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
-
     return () => lenis.destroy();
   }, []);
 
-  // ── Scroll progress + back to top ──
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop  = window.scrollY;
-      const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
       setShowTop(scrollTop > 400);
     };
@@ -502,14 +462,13 @@ export default function Home() {
     setSending(true);
     setSendError(false);
     try {
-      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(formData) });
+      const res  = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(formData) });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed");
       setFormSent(true);
       setFormData({ name: "", email: "", message: "" });
       haptic.success();
       showToast("✅ Message sent! I'll get back to you soon.");
-      // 🎉 Confetti!
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.7 }, colors: ["#a78bfa", "#60a5fa", "#f472b6", "#34d399", "#fff"] });
       setTimeout(() => confetti({ particleCount: 60, spread: 50, origin: { y: 0.6 }, colors: ["#a78bfa", "#2563eb"] }), 400);
       setTimeout(() => setFormSent(false), 4000);
@@ -523,7 +482,6 @@ export default function Home() {
 
   return (
     <>
-      {/* ── Loading Screen ── */}
       <AnimatePresence>
         {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       </AnimatePresence>
@@ -537,7 +495,6 @@ export default function Home() {
           }
         `}</style>
 
-        {/* Background blobs + tech icons */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
           <div className="blob-1 absolute rounded-full" style={{ width: 600, height: 600, top: "-100px", left: "-150px", background: "radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)", filter: "blur(60px)" }} />
           <div className="blob-2 absolute rounded-full" style={{ width: 500, height: 500, bottom: "10%", right: "-100px", background: "radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%)", filter: "blur(50px)" }} />
@@ -656,63 +613,21 @@ export default function Home() {
         <AnimatedStats />
         <CurrentlyLearning />
 
-        {/* ── CTA Banner ── */}
+        {/* CTA Banner */}
         <section style={{ position: "relative", zIndex: 1, padding: "0 24px 80px" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }} viewport={{ once: true }}
-              style={{
-                borderRadius: 24,
-                padding: "48px 40px",
-                textAlign: "center",
-                background: "linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(37,99,235,0.15) 100%)",
-                border: "1px solid rgba(124,58,237,0.25)",
-                backdropFilter: "blur(12px)",
-                position: "relative",
-                overflow: "hidden",
-              }}
+              style={{ borderRadius: 24, padding: "48px 40px", textAlign: "center", background: "linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(37,99,235,0.15) 100%)", border: "1px solid rgba(124,58,237,0.25)", backdropFilter: "blur(12px)", position: "relative", overflow: "hidden" }}
             >
-              {/* Glow bg */}
               <div style={{ position: "absolute", top: "-60px", left: "50%", transform: "translateX(-50%)", width: 300, height: 300, background: "radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%)", filter: "blur(40px)", pointerEvents: "none" }} />
-              <motion.p
-                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }} viewport={{ once: true }}
-                style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#60a5fa", marginBottom: 12 }}
-              >
-                Open to Opportunities
-              </motion.p>
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }} viewport={{ once: true }}
-                style={{ fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, color: "#f1f5f9", marginBottom: 12, lineHeight: 1.3 }}
-              >
-                Got a project in mind?
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }} viewport={{ once: true }}
-                style={{ fontSize: 15, color: "#94a3b8", marginBottom: 32, maxWidth: 500, margin: "0 auto 32px" }}
-              >
-                Let&apos;s build something amazing together! I&apos;m available for freelance projects, collaborations, and full-time opportunities.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 }} viewport={{ once: true }}
-                style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
-              >
-                <button
-                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                  className="glow-btn"
-                  style={{ padding: "14px 32px", borderRadius: 50, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, boxShadow: "0 0 24px rgba(124,58,237,0.4)" }}
-                >
-                  🚀 Hire Me
-                </button>
-                <motion.a href="/cv/shadman-cv.pdf" download
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(124,58,237,0.4)" }}
-                  whileTap={{ scale: 0.97 }}
-                  style={{ padding: "14px 32px", borderRadius: 50, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "var(--purple-light)", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "border-color 0.3s ease" }}
-                >
+              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} viewport={{ once: true }} style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#60a5fa", marginBottom: 12 }}>Open to Opportunities</motion.p>
+              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} viewport={{ once: true }} style={{ fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, color: "#f1f5f9", marginBottom: 12, lineHeight: 1.3 }}>Got a project in mind?</motion.h2>
+              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} viewport={{ once: true }} style={{ fontSize: 15, color: "#94a3b8", marginBottom: 32, maxWidth: 500, margin: "0 auto 32px" }}>Let&apos;s build something amazing together! I&apos;m available for freelance projects, collaborations, and full-time opportunities.</motion.p>
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }} viewport={{ once: true }} style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+                <button onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} className="glow-btn" style={{ padding: "14px 32px", borderRadius: 50, background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, boxShadow: "0 0 24px rgba(124,58,237,0.4)" }}>🚀 Hire Me</button>
+                <motion.a href="/cv/shadman-cv.pdf" download whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(124,58,237,0.4)" }} whileTap={{ scale: 0.97 }} style={{ padding: "14px 32px", borderRadius: 50, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "var(--purple-light)", fontWeight: 700, fontSize: 15, cursor: "pointer", letterSpacing: 0.5, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "border-color 0.3s ease" }}>
                   <FaDownload size={14} /> Download CV
                 </motion.a>
               </motion.div>
@@ -728,8 +643,6 @@ export default function Home() {
         <section id="projects" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <SectionTitle title="Featured Projects" sub="Things I've built" />
-
-            {/* Filter Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }}
@@ -738,20 +651,12 @@ export default function Home() {
               {PROJECT_FILTERS.map((f) => (
                 <motion.button key={f} onClick={() => { haptic.light(); setActiveFilter(f); }}
                   whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }}
-                  style={{
-                    padding: "8px 20px", borderRadius: 50, border: "none", cursor: "pointer",
-                    fontSize: 13, fontWeight: 600, letterSpacing: 0.3,
-                    background: activeFilter === f ? "linear-gradient(135deg, #7c3aed, #2563eb)" : "rgba(255,255,255,0.05)",
-                    color: activeFilter === f ? "#fff" : "var(--text-secondary)",
-                    boxShadow: activeFilter === f ? "0 0 16px rgba(124,58,237,0.4)" : "none",
-                    transition: "all 0.25s ease",
-                  }}
+                  style={{ padding: "8px 20px", borderRadius: 50, border: "none", cursor: "pointer", fontSize: 13, fontWeight: 600, letterSpacing: 0.3, background: activeFilter === f ? "linear-gradient(135deg, #7c3aed, #2563eb)" : "rgba(255,255,255,0.05)", color: activeFilter === f ? "#fff" : "var(--text-secondary)", boxShadow: activeFilter === f ? "0 0 16px rgba(124,58,237,0.4)" : "none", transition: "all 0.25s ease" }}
                 >
                   {f}
                 </motion.button>
               ))}
             </motion.div>
-
             <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24, marginTop: 24 }}>
               <AnimatePresence mode="popLayout">
                 {PROJECTS.filter((p) => p.filter.includes(activeFilter)).map((p) => (
@@ -788,51 +693,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ╔══════════════════════════════╗
-            ║  EDUCATION TIMELINE          ║
-            ╚══════════════════════════════╝ */}
+        {/* EDUCATION TIMELINE */}
         <section id="timeline" style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <SectionTitle title="Education Journey" sub="My academic milestones" />
             <div style={{ position: "relative", marginTop: 50 }}>
-              {/* Vertical line */}
               <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 2, background: "linear-gradient(180deg, #7c3aed, #2563eb, #7c3aed)", transform: "translateX(-50%)", opacity: 0.4 }} />
-
               {TIMELINE.map(({ year, title, subtitle, desc, result, Icon, color }, i) => {
                 const isLeft = i % 2 === 0;
                 return (
-                  <motion.div
-                    key={year}
-                    initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    viewport={{ once: true }}
-                    style={{
-                      display: "flex",
-                      justifyContent: isLeft ? "flex-start" : "flex-end",
-                      marginBottom: 40,
-                      position: "relative",
-                    }}
-                  >
-                    {/* Card */}
-                    <motion.div
-                      className="glass-card"
-                      whileHover={{
-                        scale: 1.04,
-                        boxShadow: `0 0 24px ${color}55`,
-                        transition: { duration: 0.2 },
-                      }}
-                      style={{
-                        width: "44%",
-                        borderRadius: 16,
-                        padding: "20px 22px",
-                        position: "relative",
-                        borderLeft: isLeft ? `3px solid ${color}` : "none",
-                        borderRight: !isLeft ? `3px solid ${color}` : "none",
-                        cursor: "default",
-                        transition: "box-shadow 0.3s ease",
-                      }}
-                    >
+                  <motion.div key={year} initial={{ opacity: 0, x: isLeft ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }} style={{ display: "flex", justifyContent: isLeft ? "flex-start" : "flex-end", marginBottom: 40, position: "relative" }}>
+                    <motion.div className="glass-card" whileHover={{ scale: 1.04, boxShadow: `0 0 24px ${color}55`, transition: { duration: 0.2 } }} style={{ width: "44%", borderRadius: 16, padding: "20px 22px", position: "relative", borderLeft: isLeft ? `3px solid ${color}` : "none", borderRight: !isLeft ? `3px solid ${color}` : "none", cursor: "default", transition: "box-shadow 0.3s ease" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
                         <Icon size={20} style={{ color }} />
                         <span style={{ fontSize: 13, fontWeight: 700, color, letterSpacing: 1 }}>{year}</span>
@@ -842,16 +713,7 @@ export default function Home() {
                       <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 8 }}>{desc}</p>
                       <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", background: color, borderRadius: 20, padding: "3px 10px" }}>{result}</span>
                     </motion.div>
-
-                    {/* Center dot */}
-                    <div style={{
-                      position: "absolute", left: "50%", top: "50%",
-                      transform: "translate(-50%, -50%)",
-                      width: 14, height: 14, borderRadius: "50%",
-                      background: color,
-                      boxShadow: `0 0 10px ${color}, 0 0 20px ${color}40`,
-                      zIndex: 2,
-                    }} />
+                    <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: 14, height: 14, borderRadius: "50%", background: color, boxShadow: `0 0 10px ${color}, 0 0 20px ${color}40`, zIndex: 2 }} />
                   </motion.div>
                 );
               })}
@@ -859,42 +721,27 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ╔══════════════════════════════╗
-            ║  GITHUB ACTIVITY             ║
-            ╚══════════════════════════════╝ */}
         <GitHubStats />
 
-        {/* ╔══════════════════════════════╗
-            ║    OPEN SOURCE               ║
-            ╚══════════════════════════════╝ */}
+        {/* OPEN SOURCE */}
         <section style={{ position: "relative", zIndex: 1, padding: "0 24px 80px" }}>
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <SectionTitle title="Open Source" sub="My contributions to the community" />
-            <motion.div
-              variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
-              style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, marginTop: 40 }}
-            >
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, marginTop: 40 }}>
               {[
-                { title: "Portfolio Website",    desc: "My personal portfolio built with Next.js, Tailwind CSS & Framer Motion. Open source for the community.",          stars: "⭐", lang: "JavaScript", color: "#f7df1e", url: "https://github.com/Shadman-Shakib-Fuad" },
-                { title: "DocAppoint",           desc: "A doctor appointment booking platform built with React & Firebase. Clean UI with real-time functionality.",       stars: "⭐", lang: "React",      color: "#61dafb", url: "https://github.com/Shadman-Shakib-Fuad" },
-                { title: "Mango Bookstore",      desc: "Modern online bookstore web app built with Next.js and Tailwind CSS. Features smooth animations.",                stars: "⭐", lang: "Next.js",    color: "#fff",    url: "https://github.com/Shadman-Shakib-Fuad" },
+                { title: "Portfolio Website",  desc: "My personal portfolio built with Next.js, Tailwind CSS & Framer Motion. Open source for the community.",        stars: "⭐", lang: "JavaScript", color: "#f7df1e", url: "https://github.com/Shadman-Shakib-Fuad" },
+                { title: "DocAppoint",         desc: "A doctor appointment booking platform built with React & Firebase. Clean UI with real-time functionality.",     stars: "⭐", lang: "React",      color: "#61dafb", url: "https://github.com/Shadman-Shakib-Fuad" },
+                { title: "Mango Bookstore",    desc: "Modern online bookstore web app built with Next.js and Tailwind CSS. Features smooth animations.",              stars: "⭐", lang: "Next.js",    color: "#fff",    url: "https://github.com/Shadman-Shakib-Fuad" },
               ].map(({ title, desc, stars, lang, color, url }) => (
-                <motion.div key={title} variants={fadeUp}
-                  whileHover={{ y: -5, boxShadow: "0 0 20px rgba(124,58,237,0.25)" }}
-                  className="glass-card"
-                  style={{ borderRadius: 16, padding: 22, display: "flex", flexDirection: "column", gap: 12, transition: "all 0.3s ease" }}
-                >
+                <motion.div key={title} variants={fadeUp} whileHover={{ y: -5, boxShadow: "0 0 20px rgba(124,58,237,0.25)" }} className="glass-card" style={{ borderRadius: 16, padding: 22, display: "flex", flexDirection: "column", gap: 12, transition: "all 0.3s ease" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <h3 style={{ fontSize: 16, fontWeight: 700, color: "var(--text-primary)" }}>{title}</h3>
-                    <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}>
-                      <FaGithub size={18} />
-                    </a>
+                    <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--purple-light)" }}><FaGithub size={18} /></a>
                   </div>
                   <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65, flex: 1 }}>{desc}</p>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "#94a3b8" }}>
-                      <span style={{ width: 10, height: 10, borderRadius: "50%", background: color, display: "inline-block" }} />
-                      {lang}
+                      <span style={{ width: 10, height: 10, borderRadius: "50%", background: color, display: "inline-block" }} />{lang}
                     </span>
                     <span style={{ fontSize: 12, color: "#94a3b8" }}>{stars} Star</span>
                   </div>
@@ -904,31 +751,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ╔══════════════════════════════╗
-            ║      TESTIMONIALS            ║
-            ╚══════════════════════════════╝ */}
+        {/* TESTIMONIALS */}
         <section style={{ position: "relative", zIndex: 1, padding: "80px 24px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTitle title="What People Say" sub="Feedback from peers & collaborators" />
-            <motion.div
-              variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
-              style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24, marginTop: 40 }}
-            >
+            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 24, marginTop: 40 }}>
               {TESTIMONIALS.map(({ name, role, text, avatar, color }) => (
-                <motion.div
-                  key={name} variants={fadeUp}
-                  whileHover={{ y: -5, boxShadow: `0 0 24px ${color}33` }}
-                  className="glass-card"
-                  style={{ borderRadius: 18, padding: 28, display: "flex", flexDirection: "column", gap: 16, transition: "all 0.3s ease", borderTop: `3px solid ${color}` }}
-                >
-                  {/* Quote */}
+                <motion.div key={name} variants={fadeUp} whileHover={{ y: -5, boxShadow: `0 0 24px ${color}33` }} className="glass-card" style={{ borderRadius: 18, padding: 28, display: "flex", flexDirection: "column", gap: 16, transition: "all 0.3s ease", borderTop: `3px solid ${color}` }}>
                   <p style={{ fontSize: 32, color, lineHeight: 1, marginBottom: -8 }}>"</p>
                   <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.75, fontStyle: "italic" }}>{text}</p>
-                  {/* Author */}
                   <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
-                    <div style={{ width: 42, height: 42, borderRadius: "50%", background: `${color}22`, border: `2px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color, flexShrink: 0 }}>
-                      {avatar}
-                    </div>
+                    <div style={{ width: 42, height: 42, borderRadius: "50%", background: `${color}22`, border: `2px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color, flexShrink: 0 }}>{avatar}</div>
                     <div>
                       <p style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>{name}</p>
                       <p style={{ fontSize: 12, color: "var(--text-secondary)" }}>{role}</p>
@@ -999,8 +832,7 @@ export default function Home() {
               </a>
             ))}
           </div>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 50, padding: "7px 18px", marginBottom: 16, fontSize: 13, color: "var(--text-secondary)" }}>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 50, padding: "7px 18px", marginBottom: 16, fontSize: 13, color: "var(--text-secondary)" }}>
             <span style={{ fontSize: 16 }}>👁️</span>
             <span>
               {visitors !== null ? (
@@ -1013,62 +845,29 @@ export default function Home() {
           <p style={{ fontSize: 12, color: "rgba(148,163,184,0.4)" }}>© 2026 All Rights Reserved</p>
         </footer>
 
-      {/* ── CV Preview Modal ── */}
+        {/* CV Preview Modal */}
         <AnimatePresence>
           {cvPreview && (
-            <motion.div
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => { haptic.light(); setCvPreview(false); }}
-              style={{ position: "fixed", inset: 0, zIndex: 9998, background: "rgba(0,0,0,0.85)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, backdropFilter: "blur(6px)" }}
-            >
-              <motion.div
-                initial={{ scale: 0.88, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.88, opacity: 0, y: 20 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                onClick={(e) => e.stopPropagation()}
-                style={{ background: "#0d0d1a", borderRadius: 20, overflow: "hidden", width: "100%", maxWidth: 800, maxHeight: "90vh", display: "flex", flexDirection: "column", border: "1px solid rgba(124,58,237,0.3)", boxShadow: "0 0 60px rgba(124,58,237,0.3)" }}
-              >
-                {/* Modal header */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => { haptic.light(); setCvPreview(false); }} style={{ position: "fixed", inset: 0, zIndex: 9998, background: "rgba(0,0,0,0.85)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, backdropFilter: "blur(6px)" }}>
+              <motion.div initial={{ scale: 0.88, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.88, opacity: 0, y: 20 }} transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} onClick={(e) => e.stopPropagation()} style={{ background: "#0d0d1a", borderRadius: 20, overflow: "hidden", width: "100%", maxWidth: 800, maxHeight: "90vh", display: "flex", flexDirection: "column", border: "1px solid rgba(124,58,237,0.3)", boxShadow: "0 0 60px rgba(124,58,237,0.3)" }}>
                 <div style={{ padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
                   <span style={{ fontWeight: 700, color: "var(--purple-light)", fontSize: 15 }}>📄 CV Preview</span>
                   <div style={{ display: "flex", gap: 10 }}>
-                    <a href="/cv/shadman-cv.pdf" download
-                      style={{ padding: "7px 16px", borderRadius: 8, background: "linear-gradient(135deg, #7c3aed, #2563eb)", color: "#fff", fontWeight: 600, fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}>
-                      <FaDownload size={12} /> Download
-                    </a>
-                    <button onClick={() => { haptic.light(); setCvPreview(false); }}
-                      style={{ background: "rgba(255,255,255,0.06)", border: "none", color: "#94a3b8", cursor: "pointer", borderRadius: 8, padding: "7px 12px", fontSize: 18, lineHeight: 1 }}>
-                      ✕
-                    </button>
+                    <a href="/cv/shadman-cv.pdf" download style={{ padding: "7px 16px", borderRadius: 8, background: "linear-gradient(135deg, #7c3aed, #2563eb)", color: "#fff", fontWeight: 600, fontSize: 13, textDecoration: "none", display: "flex", alignItems: "center", gap: 6 }}><FaDownload size={12} /> Download</a>
+                    <button onClick={() => { haptic.light(); setCvPreview(false); }} style={{ background: "rgba(255,255,255,0.06)", border: "none", color: "#94a3b8", cursor: "pointer", borderRadius: 8, padding: "7px 12px", fontSize: 18, lineHeight: 1 }}>✕</button>
                   </div>
                 </div>
-                {/* PDF embed */}
                 <iframe src="/cv/shadman-cv.pdf" style={{ flex: 1, border: "none", minHeight: 500 }} title="CV Preview" />
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* ── Toast Notification ── */}
+        {/* Toast */}
         <AnimatePresence>
           {toast && (
-            <motion.div
-              initial={{ opacity: 0, y: 40, x: "-50%" }}
-              animate={{ opacity: 1, y: 0, x: "-50%" }}
-              exit={{ opacity: 0, y: 40, x: "-50%" }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                position: "fixed", bottom: 90, left: "50%",
-                zIndex: 9999,
-                background: toast.type === "error" ? "rgba(239,68,68,0.15)" : "rgba(34,197,94,0.15)",
-                border: `1px solid ${toast.type === "error" ? "rgba(239,68,68,0.4)" : "rgba(34,197,94,0.4)"}`,
-                borderRadius: 50, padding: "12px 24px",
-                fontSize: 14, fontWeight: 600,
-                color: toast.type === "error" ? "#fca5a5" : "#86efac",
-                backdropFilter: "blur(12px)",
-                boxShadow: toast.type === "error" ? "0 0 20px rgba(239,68,68,0.2)" : "0 0 20px rgba(34,197,94,0.2)",
-                whiteSpace: "nowrap",
-              }}
-            >
+            <motion.div initial={{ opacity: 0, y: 40, x: "-50%" }} animate={{ opacity: 1, y: 0, x: "-50%" }} exit={{ opacity: 0, y: 40, x: "-50%" }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: "fixed", bottom: 90, left: "50%", zIndex: 9999, background: toast.type === "error" ? "rgba(239,68,68,0.15)" : "rgba(34,197,94,0.15)", border: `1px solid ${toast.type === "error" ? "rgba(239,68,68,0.4)" : "rgba(34,197,94,0.4)"}`, borderRadius: 50, padding: "12px 24px", fontSize: 14, fontWeight: 600, color: toast.type === "error" ? "#fca5a5" : "#86efac", backdropFilter: "blur(12px)", boxShadow: toast.type === "error" ? "0 0 20px rgba(239,68,68,0.2)" : "0 0 20px rgba(34,197,94,0.2)", whiteSpace: "nowrap" }}>
               {toast.msg}
             </motion.div>
           )}
@@ -1076,24 +875,14 @@ export default function Home() {
 
         <WhatsAppButton />
 
-      {/* ── Back to Top Button ── */}
+        {/* Back to Top */}
         <AnimatePresence>
           {showTop && (
             <motion.button
-              initial={{ opacity: 0, scale: 0.5, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.5, y: 20 }}
+              initial={{ opacity: 0, scale: 0.5, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.5, y: 20 }}
               transition={{ duration: 0.5, type: "spring", stiffness: 180, damping: 22, mass: 1.1 }}
               onClick={() => { haptic.light(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-              style={{
-                position: "fixed", bottom: 154, right: 24, zIndex: 50,
-                width: 52, height: 52, borderRadius: "50%",
-                background: "linear-gradient(135deg, #7c3aed, #2563eb)",
-                border: "none", cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                boxShadow: "0 0 20px rgba(124,58,237,0.5)",
-                color: "#fff", fontSize: 20,
-              }}
+              style={{ position: "fixed", bottom: 154, right: 24, zIndex: 50, width: 52, height: 52, borderRadius: "50%", background: "linear-gradient(135deg, #7c3aed, #2563eb)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(124,58,237,0.5)", color: "#fff", fontSize: 20 }}
               whileHover={{ scale: 1.12, boxShadow: "0 0 32px rgba(124,58,237,0.7)", transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
               whileTap={{ scale: 0.92 }}
               aria-label="Back to top"
