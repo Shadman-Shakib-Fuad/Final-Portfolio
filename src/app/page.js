@@ -76,8 +76,11 @@ const PROJECTS = [
 const PROJECT_FILTERS = ["All", "React", "Next.js", "Firebase", "Tailwind", "CSS", "Node.js", "MongoDB"];
 
 const CERTS = [
-  { img: "/certificate/certificate1.png", title: "AI CodeLab Program 2026",           desc: "Awarded for gaining foundational knowledge of modern AI concepts, Agentic AI, and real-world AI solution design — organized by IEEE CS SEU SBC & Dept. of CSE, Southeast University in collaboration with Learn With Sumit.", badge: "Certificate of Appreciation" },
+  { img: "/certificate/certificate3.png", title: "Complete Web Development – Programming Hero", desc: "Certificate of Completion with Excellence awarded for successfully completing the Complete Web Development Course with Programming Hero (Batch-13). Conducted from 01 January 2026 to 12 July 2026, demonstrating proficiency in HTML, CSS, JavaScript, React.js, Next.js, Node.js, Express.js, and MongoDB along with AI-powered development practices. ID: WEB13-3211", badge: "Certificate of Excellence" },
   { img: "/certificate/certificate2.png", title: "Introduction to CIP – OPSWAT Academy", desc: "Successfully graduated from the Introduction to CIP (Critical Infrastructure Protection) program by OPSWAT Academy. Issued May 15, 2026 · Valid until May 15, 2027 · ID: OPA8kq55gg", badge: "Verified Certificate", verify: "https://learn.opswatacademy.com/certificate/OPA8kq55gg" },
+  { img: "/certificate/certificate1.png", title: "AI CodeLab Program 2026", desc: "Awarded for gaining foundational knowledge of modern AI concepts, Agentic AI, and real-world AI solution design — organized by IEEE CS SEU SBC & Dept. of CSE, Southeast University in collaboration with Learn With Sumit.", badge: "Certificate of Appreciation" },
+  
+  
 ];
 
 const TIMELINE = [
